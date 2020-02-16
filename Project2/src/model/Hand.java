@@ -5,7 +5,7 @@
  * Date: 2/15/2020
  * Author: Coby Kromis - cobykromis - R11567402
  * 
- * Description: Class for sorting the hand and determining how many excercises while be done and skipped
+ * Description: Class for sorting the hand and determining how many excercises while be done and skipped.
  */
 package model;
 
