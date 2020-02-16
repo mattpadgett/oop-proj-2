@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* CS 2365 Object-Oriented Programming - Spring 2020
+ * Project 2 - UNO Exercieces
+ * File: Deck.Java
+ * Date: 02/15/2020
+ * Author: Jason Luckow - jluckow - R11560069
+ * Contributors: None
+ * 
+ * Description: To initialize deck and manipulate
  */
+
 package model;
 
-/**
- *
- * @author Matt
- */
 public class Deck {
+    int count, topIndex;
     
+    public Deck(){
+        
+        
+    }
 }
