@@ -11,10 +11,43 @@
 package model;
 
 public class Deck {
-    int count, topIndex;
+    int count, topIndex, num, connected, deckSize;
+    Card cards = new Card();
     
-    public Deck(){
+    public Deck(){//CONSTRUCTOR
+        this.count = 0;
+        this.topIndex = 0;  
+        this.deckSize = 180;
+    }
+    
+    public Deck(int num, boolean connected){
+        deckSize *= num;
+    }
+    
+    //GETTERS
+    public int getCount(){
+        return count;
+    }
+    public int getTopIndex(){
+        return topIndex;
+    }
+    
+    //SETTERS
+    public void setCount(int count){
+        this.count = count;
+    }
+    public void setTopIndex(int topIndex){
+        this.topIndex = topIndex;
+    }
+    
+    //METHODS
+    public void shuffle(int Deck;){
         
+    }
+    public void draw(){
+        
+    }
+    public void removeActionCards(){
         
     }
 }
