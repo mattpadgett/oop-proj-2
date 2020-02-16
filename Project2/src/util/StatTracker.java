@@ -36,6 +36,10 @@ public class StatTracker { // start of StatTracker class
     {
         return skips;
     }
+    public int []getBiggestSkips() // gets the array of biggest skips
+    {
+        return biggestSkips;
+    }
     // Setters/Mutators
     public void setReps(int value, int index) // sets a value in the reps array at a specified index
     {
@@ -44,5 +48,9 @@ public class StatTracker { // start of StatTracker class
     public void setSkips(int value, int index) // sets a value in the skips array at a specified index
     {
         skips[index] = value;
+    }
+    public void setBiggestSkips(int value, int index) // sets a value in the biggestSkips array at a specified index
+    {
+        biggestSkips[index] = value;
     }
 } // end of StatTracker class
