@@ -18,15 +18,25 @@ public class StatTracker { // start of StatTracker class
     private int biggestSkips[] = new int[5];
     
     
-    public StatTracker(boolean hasAction) // Stat Tracker Constructor
+    public StatTracker() // Stat Tracker Constructor to intialize attributes
     {
         for(int i = 0; i < 5; i++)
         {
-            reps[i] = 0;
-            skips[i] = 0;
-            biggestSkips[i] = 0;
+            this.reps[i] = 0;
+            this.skips[i] = 0;
+            this.biggestSkips[i] = 0;
         }
     }
+    public StatTracker(boolean hasAction) // Stat Tracker Constructor with hasAction as an arguement
+    {
+        if(!hasAction) // if deck of cards do not have action cards, set their stats to zero
+        {
+            this.reps[4] = 0;
+            this.skips[4] = 0;
+            this.biggestSkips[4] = 0;
+        }
+    }
+   
      // Getters/Accesor
     public int []getReps() // gets the array of reps
     {
@@ -43,14 +53,14 @@ public class StatTracker { // start of StatTracker class
     // Setters/Mutators
     public void setReps(int value, int index) // sets a value in the reps array at a specified index
     {
-        reps[index] = value;
+        this.reps[index] = value;
     }
     public void setSkips(int value, int index) // sets a value in the skips array at a specified index
     {
-        skips[index] = value;
+        this.skips[index] = value;
     }
     public void setBiggestSkips(int value, int index) // sets a value in the biggestSkips array at a specified index
     {
-        biggestSkips[index] = value;
+        this.biggestSkips[index] = value;
     }
 } // end of StatTracker class
