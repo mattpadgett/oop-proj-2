@@ -38,15 +38,15 @@ public class StatTracker { // start of StatTracker class
     }
    
      // Getters/Accesor
-    public int []getReps() // gets the array of reps
+    public int[] getReps() // gets the array of reps
     {
         return reps;
     }
-    public int []getSkips() // gets the array of skips
+    public int[] getSkips() // gets the array of skips
     {
         return skips;
     }
-    public int []getBiggestSkips() // gets the array of biggest skips
+    public int[] getBiggestSkips() // gets the array of biggest skips
     {
         return biggestSkips;
     }
