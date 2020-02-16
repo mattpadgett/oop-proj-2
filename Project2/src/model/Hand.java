@@ -12,12 +12,13 @@ package model;
 public class Hand {
     
     private int amount;
-    private int ID;
+    private int id;
+    private Card[] cards = new Card[amount];
     
     public Hand () {
         
         amount = 0;
-        ID = 0;
+        id = 0;
         
     }
     
@@ -27,9 +28,15 @@ public class Hand {
         
     }
     
-    public int getID () {
+    public Card[] getCards () {
         
-        return ID;
+        return cards;
+        
+    }
+    
+    public int getId () {
+        
+        return id;
         
     }
     
@@ -39,25 +46,35 @@ public class Hand {
         
     }
     
-    public void setID (int ID) {
+    public void setId (int id) {
         
-        this.ID = ID;
+        this.id = id;
+        
+    }
+    
+    public void setCards (Card cards[]) {
+        
+        this.cards = cards;
         
     }
    
     public Card[] sort(Card cards[], int amount) {
         
-        for (int i = 0; i < amount; i++) {
-            
-            if (cards[i].getColor() != cards[i + 1].getColor()) {
+        for (int i = 0; i < amount - 1; i++) {
                 
-                Card temp = cards[i + 1];
-                cards[i + 1] = cards[i + 2];
-                cards[i + 2] = temp;
-                temp = null;
+            for (int j = 1; j < amount - 1; j++) {
+                
+                if (!cards[i].getColor().equals(cards[i + 1])) {
+                
+                    Card temp = cards[i + 1];
+                    cards[i + 1] = cards[j + 1];
+                    cards[j] = temp;
+                    temp = null;
               
-            }
-            
+                }
+                
+            }    
+                  
         }
         
         return cards;
