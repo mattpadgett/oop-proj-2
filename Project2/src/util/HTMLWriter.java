@@ -10,11 +10,37 @@
 
 package util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Hand;
+
 public class HTMLWriter {
     
     public static void appendHand(Hand hand) {
         
+        //hand.getId();
         
+        FileWriter output = null;
+        File outputFile = new File("HTMLOutput.html");
+        
+        try {
+            
+            output = new FileWriter(outputFile, true);
+            
+            
+            
+            output.close();
+            
+        } catch (IOException ex) {
+            
+            ex.printStackTrace();
+            
+        }
         
     }
     
