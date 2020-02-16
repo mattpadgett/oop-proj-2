@@ -15,6 +15,7 @@ public class StatTracker { // start of StatTracker class
     // Use 2 integer arrays for reps and skips.
     private int reps[] = new int[5]; // INDEX LABELS: 0 - Pushups, 1 - Squat, 2 - Situp, 3 - Lunges, 4 - Burpees
     private int skips[] = new int[5];
+    private int biggestSkips[] = new int[5];
     
     
     public StatTracker(boolean hasAction) // Stat Tracker Constructor
@@ -23,16 +24,17 @@ public class StatTracker { // start of StatTracker class
         {
             reps[i] = 0;
             skips[i] = 0;
+            biggestSkips[i] = 0;
         }
     }
      // Getters/Accesor
-    public int getReps(int index) // gets the amount of reps from the array at a specified index
+    public int []getReps() // gets the array of reps
     {
-        return reps[index];
+        return reps;
     }
-    public int getSkips(int index) // gets the amount of skips from the array at a specified index
+    public int []getSkips() // gets the array of skips
     {
-        return skips[index];
+        return skips;
     }
     // Setters/Mutators
     public void setReps(int value, int index) // sets a value in the reps array at a specified index
@@ -43,5 +45,4 @@ public class StatTracker { // start of StatTracker class
     {
         skips[index] = value;
     }
-
 } // end of StatTracker class
