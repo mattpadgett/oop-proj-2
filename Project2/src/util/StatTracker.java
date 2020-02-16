@@ -45,4 +45,3 @@ public class StatTracker { // start of StatTracker class
     }
 
 } // end of StatTracker class
-} // end of StatTracker class
