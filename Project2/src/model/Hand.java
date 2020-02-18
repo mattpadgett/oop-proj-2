@@ -5,7 +5,7 @@
  * Date: 2/15/2020
  * Author: Coby Kromis - cobykromis - R11567402
  * 
- * Description: Class for sorting the hand and determining how many excercises while be done and skipped
+ * Description: Class for sorting the hand and determining how many excercises will be done and skipped
  */
 package model;
 
@@ -122,7 +122,7 @@ public class Hand {
                 
                 System.out.print("Yellow\t\t");
                 
-            } else {
+            } else if (sortHand.cards[j].getColor() == Color.green) {
             
                 System.out.print("Green\t\t");
             
@@ -133,6 +133,60 @@ public class Hand {
         }
         
         return sortHand;
+        
+    }
+    
+    public static int[] interpret(Hand interpretHand) {
+        
+        int[] exerciseNum = new int[5];
+        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0;
+        
+        for (int i = 0; i < interpretHand.amount; i++) {
+            
+            if (interpretHand.cards[i].getValue() < 10) {
+                
+                if (interpretHand.cards[i].getColor() == Color.red) {
+
+                    sitUp = sitUp + interpretHand.cards[i].getValue();
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+
+                    pushUp = pushUp + interpretHand.cards[i].getValue();
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+
+                    squat = squat + interpretHand.cards[i].getValue();
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.green) {
+
+                    lunge = lunge + interpretHand.cards[i].getValue();
+                    
+                }
+                    
+            }
+            
+            else if (interpretHand.cards[i].getValue() == 10) {
+                
+                
+                
+            } else if (interpretHand.cards[i].getValue() == 11) {
+                
+                
+                
+            } else if (interpretHand.cards[i].getValue() == 12) {
+                
+                
+                
+            }
+                
+        }
+        
+        exerciseNum[0] = pushUp;
+        exerciseNum[1] = squat;
+        exerciseNum[2] = sitUp;
+        exerciseNum[3] = lunge;
+        exerciseNum[4] = burpee;
+        return exerciseNum;
         
     }
     
