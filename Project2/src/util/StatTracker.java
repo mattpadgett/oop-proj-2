@@ -29,7 +29,7 @@ public class StatTracker { // start of StatTracker class
     }
     public StatTracker(boolean hasAction) // Stat Tracker Constructor with hasAction as an arguement
     {
-        if(!hasAction) // if deck of cards do not have action cards, set their stats to zero
+        if(!hasAction) // if deck of cards do not have action cards, set burpee stats to zero
         {
             this.reps[4] = 0;
             this.skips[4] = 0;
