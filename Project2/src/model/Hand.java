@@ -58,6 +58,41 @@ public class Hand {
         
     }
     
+    public static void printHand(Hand printHand) {
+        
+        System.out.println("Color:\t\tValue:");
+           
+        for (int j = 0; j < printHand.amount; j++) {
+            
+            if (printHand.cards[j].getColor() == Color.black) {
+                
+                System.out.print("Black\t\t");
+                
+            } else if (printHand.cards[j].getColor() == Color.blue) {
+                
+                System.out.print("Blue\t\t");
+                
+            } else if (printHand.cards[j].getColor() == Color.red) {
+                
+                System.out.print("Red\t\t");
+                
+            } else if (printHand.cards[j].getColor() == Color.yellow) {
+                
+                System.out.print("Yellow\t\t");
+                
+            } else if (printHand.cards[j].getColor() == Color.green) {
+            
+                System.out.print("Green\t\t");
+            
+            }
+            
+            System.out.println(printHand.cards[j].getValue());
+            
+        }
+        
+        System.out.println("");
+        
+    }
     //Sorts hand by color and rank
     public static Hand sort(Hand sortHand) {
         
@@ -66,21 +101,31 @@ public class Hand {
         Card temp = null;
         
         while (i < sortHand.amount - 1) {
-             
-            for (int j = i + 1; j < sortHand.amount - 1; j++) {
+            
+            for (int j = i + 1; j < sortHand.amount; j++) {                
                 
                 if (sortHand.cards[i].getColor().equals(sortHand.cards[j].getColor())) {
                     
-                    temp = sortHand.cards[j];
-                    sortHand.cards[j] = sortHand.cards[i + replaceCount + 1];
-                    sortHand.cards[i + replaceCount + 1] = temp;
+                    for (int k = i; k < sortHand.amount; k++) {
+                        
+                        if (!sortHand.cards[i].getColor().equals(sortHand.cards[k].getColor())) {
+                            
+                            temp = sortHand.cards[j];
+                            sortHand.cards[j] = sortHand.cards[k];
+                            sortHand.cards[k] = temp;
+                        
+                        }
+                    
+                    }
+                    
                     replaceCount++;
                     
                 }
-                    
+                
             }
             
             i = i + replaceCount + 1;
+            replaceCount = 0;
                   
         }
         
@@ -102,36 +147,6 @@ public class Hand {
             
         }
         
-        System.out.println("Color:\t\tValue:");
-           
-        for (int j = 0; j < sortHand.amount; j++) {
-            
-            if (sortHand.cards[j].getColor() == Color.black) {
-                
-                System.out.print("Black\t\t");
-                
-            } else if (sortHand.cards[j].getColor() == Color.blue) {
-                
-                System.out.print("Blue\t\t");
-                
-            } else if (sortHand.cards[j].getColor() == Color.red) {
-                
-                System.out.print("Red\t\t");
-                
-            } else if (sortHand.cards[j].getColor() == Color.yellow) {
-                
-                System.out.print("Yellow\t\t");
-                
-            } else if (sortHand.cards[j].getColor() == Color.green) {
-            
-                System.out.print("Green\t\t");
-            
-            }
-            
-            System.out.println(sortHand.cards[j].getValue());
-            
-        }
-        
         return sortHand;
         
     }
@@ -139,9 +154,23 @@ public class Hand {
     public static int[] interpret(Hand interpretHand) {
         
         int[] exerciseNum = new int[5];
-        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0;
+        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0;
         
         for (int i = 0; i < interpretHand.amount; i++) {
+            
+            if (interpretHand.cards[i].getColor() == Color.black) {
+                
+                if (interpretHand.cards[i].getValue() == 13) {
+                    
+                    wildCount++;
+    
+                } else if (interpretHand.cards[i].getValue() == 14) {
+                    
+                    wild4Count++;
+                    
+                }
+                
+            }
             
             if (interpretHand.cards[i].getValue() < 10) {
                 
@@ -167,19 +196,74 @@ public class Hand {
             
             else if (interpretHand.cards[i].getValue() == 10) {
                 
-                
+                if (interpretHand.cards[i].getColor() == Color.red) {
+
+                    sitUp = 0;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+
+                    pushUp = 0;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+
+                    squat = 0;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.green) {
+
+                    lunge = 0;
+                    
+                }
                 
             } else if (interpretHand.cards[i].getValue() == 11) {
                 
-                
+                if (interpretHand.cards[i].getColor() == Color.red) {
+
+                    sitUp = sitUp * 2;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+
+                    pushUp = pushUp * 2;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+
+                    squat = squat * 2;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.green) {
+
+                    lunge = lunge * 2;
+                    
+                }
                 
             } else if (interpretHand.cards[i].getValue() == 12) {
                 
-                
+                if (interpretHand.cards[i].getColor() == Color.red) {
+
+                    sitUp = 0;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+
+                    pushUp = 0;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+
+                    squat = 0;
+                    
+                } else if (interpretHand.cards[i].getColor() == Color.green) {
+
+                    lunge = 0;
+                    
+                }
                 
             }
                 
         }
+        
+        int multiFactor = 4 * wild4Count;
+        burpee = (10 * wildCount) + (10 * wild4Count);
+        sitUp = sitUp * multiFactor;
+        pushUp = pushUp * multiFactor;
+        squat = squat * multiFactor;
+        lunge = lunge * multiFactor;
         
         exerciseNum[0] = pushUp;
         exerciseNum[1] = squat;
