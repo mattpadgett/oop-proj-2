@@ -4,31 +4,40 @@
  * Date: 02/15/2020
  * Author: Jason Luckow - jluckow - R11560069
  * Contributors: None
- * 
- * Description: To initialize deck and manipulate
+ *
+ * Description: To initialize and shuffle the deck, and to draw from the deck
  */
 
 package model;
+
+import java.util.Random;
 import java.awt.Color;
 
 public class Deck {
-    int count, topIndex, num, deckSize;
+    
+    //CREATE VARIABLES
+    int deckCardCount, topDeckIndex, numDecks, deckSize;
     boolean connected, includeActionCards;
     private Card[] cards;
     
-    public Deck (){//CONSTRUCTOR
+    
+    //CONSTRUCTOR
+    public Deck (){
         
-        this.count = 0;
-        this.topIndex = 0;  
+        this.deckCardCount = 0;
+        this.topDeckIndex = 0;  
+        this.numDecks = 1;
         this.deckSize = 108;
         this.cards = new Card[324];
+        this.connected = true;
         this.includeActionCards = true;
         
     }
     
+    
+    //CLASS
     public Deck (int numDecks, boolean connected, boolean includeActionCards){
         
-        deckSize *= numDecks;
         Color c = Color.WHITE;
         int arrayCounter = 0;
         
@@ -56,7 +65,7 @@ public class Deck {
                 cards[arrayCounter] = new Card (c, 0);//ZERO ONLY HAS ONE RANK
                 arrayCounter++;
                 
-                if (includeActionCards == true){
+                if (includeActionCards == true){//EITHER INCLUDES OR EXCLUDES
                     
                     cards[arrayCounter] = new Card (Color.BLACK, 13);//WILD
                     arrayCounter++;
@@ -76,40 +85,72 @@ public class Deck {
                 }    
             }   
         }
+         
+        shuffle(cards);//SHUFFLES CARDS THAT WERE JUST CREATED
+        this.setDeckSize(arrayCounter);//METHOD OVERLOADING
+        this.setDeckCardCount(arrayCounter);//METHOD OVERLOADING
+        
     }
+    
     
     //GETTERS
-    public int getCount(){
+    public int getDeckCardCount(){
         
-        return count;
-        
-    }
-    public int getTopIndex (){
-        
-        return topIndex;
+        return deckCardCount;
         
     }
+    
+    public int getTopDeckIndex(){
+        
+        return topDeckIndex;
+        
+    }
+    
+    public int getDeckSize(){
+        
+        return deckSize;
+        
+    }
+    
     
     //SETTERS
-    public void setCount(int count){
+    public void setDeckCardCount(int deckCardCount){
         
-        this.count = count;
-        
-    }
-    public void setTopIndex(int topIndex){
-        
-        this.topIndex = topIndex;
+        this.deckCardCount = deckCardCount;
         
     }
     
-    //METHODS
-    public void shuffle(int Deck){
+    public void setTopDeckIndex(int topDeckIndex){
+        
+        this.topDeckIndex = topDeckIndex;
         
     }
+    
+    public void setDeckSize(int deckSize){
+        
+        this.deckSize = deckSize;
+        
+    }
+    
+    
+    //METHODS
+    public static void shuffle(Card[] cards){
+        
+        Random rand = new Random();
+        
+        for(int t = 0; t < cards.length; t++){
+            
+            int randomIndexSwap = rand.nextInt(cards.length);
+            
+            Card temp = cards[randomIndexSwap];
+            cards[randomIndexSwap] = cards[t];
+            cards[t] = temp;
+            
+        }
+    }
+    
     public void draw(){
         
-    }
-    public void removeActionCards(){
         
     }
     
