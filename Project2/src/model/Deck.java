@@ -39,7 +39,10 @@ public class Deck {
     public Deck (int numDecks, boolean connected, boolean includeActionCards){
         
         Color c = Color.WHITE;
-        int arrayCounter = 0;
+        int arrayCounter = 0, rankIndex = 12;
+        
+        if (includeActionCards == false)
+            rankIndex = 9; //LOWERS INDEX IF ACTION CARDS ARE TAKEN OUT
         
         for (int m = 0; m <= numDecks; m++){
 
@@ -63,20 +66,15 @@ public class Deck {
                 }
 
                 cards[arrayCounter] = new Card (c, 0);//ZERO ONLY HAS ONE RANK
+                arrayCounter++;  
+                cards[arrayCounter] = new Card (Color.BLACK, 13);//WILD
                 arrayCounter++;
-                
-                if (includeActionCards == true){//EITHER INCLUDES OR EXCLUDES
-                    
-                    cards[arrayCounter] = new Card (Color.BLACK, 13);//WILD
-                    arrayCounter++;
-                    cards[arrayCounter] = new Card (Color.BLACK, 14);//WILD DRAW FOUR
-                    arrayCounter++;
-                    
-                }
+                cards[arrayCounter] = new Card (Color.BLACK, 14);//WILD DRAW FOUR
+                arrayCounter++;
 
                 for (int k = 0; k <= 2; k++){//EACH COLOR HAS TWO RANKS
 
-                    for (int i = 1; i <= 12; i++){//RANK LOOP
+                    for (int i = 1; i <= rankIndex; i++){//RANK LOOP
 
                         cards[arrayCounter] = new Card(c,i);
                         arrayCounter++;
@@ -150,8 +148,7 @@ public class Deck {
     }
     
     public void draw(){
-        
-        
+  
     }
     
 }
