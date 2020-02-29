@@ -14,24 +14,18 @@ import java.awt.Color;
 public class Hand {
     
     //Attribute initialization
-    private int amount;
     private int id;
     private Card[] cards;
     
     //Constructor
-    public Hand (int id, int amount, Card[] cards) {
+    public Hand (int id, Card[] cards) {
         
-        this.amount = amount;
         this.id = id;
         this.cards = cards;
+        
     }
     
     //Getters
-    public int getAmount() {
-        
-        return amount;
-        
-    }
     
     public Card[] getCards() {
         
@@ -45,24 +39,11 @@ public class Hand {
         
     }
     
-    //Setters
-    public void setAmount(int amount) {
-        
-        this.amount = amount;
-        
-    }
-    
-    public void setCards(Card cards[]) {
-        
-        this.cards = cards;
-        
-    }
-    
     public static void printHand(Hand printHand) {
         
         System.out.println("Color:\t\tValue:");
            
-        for (int j = 0; j < printHand.amount; j++) {
+        for (int j = 0; j < printHand.getCards().length; j++) {
             
             if (printHand.cards[j].getColor() == Color.black) {
                 
@@ -100,13 +81,13 @@ public class Hand {
         int replaceCount = 0;
         Card temp = null;
         
-        while (i < sortHand.amount - 1) {
+        while (i < sortHand.getCards().length - 1) {
             
-            for (int j = i + 1; j < sortHand.amount; j++) {                
+            for (int j = i + 1; j < sortHand.getCards().length; j++) {                
                 
                 if (sortHand.cards[i].getColor().equals(sortHand.cards[j].getColor())) {
                     
-                    for (int k = i; k < sortHand.amount; k++) {
+                    for (int k = i; k < sortHand.getCards().length; k++) {
                         
                         if (!sortHand.cards[i].getColor().equals(sortHand.cards[k].getColor())) {
                             
@@ -129,7 +110,7 @@ public class Hand {
                   
         }
         
-        for (int j = 0; j < sortHand.amount - 1; j++) {
+        for (int j = 0; j < sortHand.getCards().length - 1; j++) {
             
             if (sortHand.cards[j].getColor().equals(sortHand.cards[j + 1].getColor())) {
                 
@@ -156,7 +137,7 @@ public class Hand {
         int[] exerciseNum = new int[5];
         int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0;
         
-        for (int i = 0; i < interpretHand.amount; i++) {
+        for (int i = 0; i < interpretHand.getCards().length; i++) {
             
             if (interpretHand.cards[i].getColor() == Color.black) {
                 
