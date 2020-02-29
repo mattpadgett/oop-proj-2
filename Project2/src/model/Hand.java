@@ -11,6 +11,21 @@ package model;
 
 import java.awt.Color;
 
+/*
+Blue - PushUps
+Yellow - Squat
+Red - SitUps
+Green - Lunges
+Black - Burpees
+0 - 1 Minute Break
+1-9 - Integer value
+10 - Skip (exercise num = 0)
+11 - Draw 2 (double exercise num)
+12 - Reverse (exercise num = 0, return cards of the color to bottom of the deck)
+13 - +10 burpees
+14 - +10 burpees and all exercises times 4
+*/
+
 public class Hand {
     
     //Attribute initialization
@@ -134,8 +149,8 @@ public class Hand {
     
     public static int[] interpret(Hand interpretHand) {
         
-        int[] exerciseNum = new int[5];
-        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0;
+        int[] exerciseNum = new int[6];
+        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0, breakNum = 0;
         
         for (int i = 0; i < interpretHand.getCards().length; i++) {
             
@@ -153,7 +168,13 @@ public class Hand {
                 
             }
             
-            if (interpretHand.cards[i].getValue() < 10) {
+            if (interpretHand.cards[i].getValue() == 0) {
+                
+                
+                
+            }
+            
+            if (interpretHand.cards[i].getValue() < 10 && interpretHand.cards[i].getValue() > 0) {
                 
                 if (interpretHand.cards[i].getColor() == Color.red) {
 
@@ -241,18 +262,26 @@ public class Hand {
         
         int multiFactor = 4 * wild4Count;
         burpee = (10 * wildCount) + (10 * wild4Count);
-        sitUp = sitUp * multiFactor;
-        pushUp = pushUp * multiFactor;
-        squat = squat * multiFactor;
-        lunge = lunge * multiFactor;
+        
+        if (multiFactor != 0) {
+            
+            sitUp = sitUp * multiFactor;
+            pushUp = pushUp * multiFactor;
+            squat = squat * multiFactor;
+            lunge = lunge * multiFactor;
+        
+        }
         
         exerciseNum[0] = pushUp;
         exerciseNum[1] = squat;
         exerciseNum[2] = sitUp;
         exerciseNum[3] = lunge;
         exerciseNum[4] = burpee;
+        exerciseNum[5] = breakNum;
         return exerciseNum;
         
     }
+    
+    
     
 }
