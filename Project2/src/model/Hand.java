@@ -11,27 +11,36 @@ package model;
 
 import java.awt.Color;
 
+/*
+Blue - PushUps
+Yellow - Squat
+Red - SitUps
+Green - Lunges
+Black - Burpees
+0 - 1 Minute Break
+1-9 - Integer value
+10 - Skip (exercise num = 0)
+11 - Draw 2 (double exercise num)
+12 - Reverse (exercise num = 0, return cards of the color to bottom of the deck)
+13 - +10 burpees
+14 - +10 burpees and all exercises times 4
+*/
+
 public class Hand {
     
     //Attribute initialization
-    private int amount;
     private int id;
     private Card[] cards;
     
     //Constructor
-    public Hand (int id, int amount, Card[] cards) {
+    public Hand (int id, Card[] cards) {
         
-        this.amount = amount;
         this.id = id;
         this.cards = cards;
+        
     }
     
     //Getters
-    public int getAmount() {
-        
-        return amount;
-        
-    }
     
     public Card[] getCards() {
         
@@ -45,24 +54,11 @@ public class Hand {
         
     }
     
-    //Setters
-    public void setAmount(int amount) {
-        
-        this.amount = amount;
-        
-    }
-    
-    public void setCards(Card cards[]) {
-        
-        this.cards = cards;
-        
-    }
-    
     public static void printHand(Hand printHand) {
         
         System.out.println("Color:\t\tValue:");
            
-        for (int j = 0; j < printHand.amount; j++) {
+        for (int j = 0; j < printHand.getCards().length; j++) {
             
             if (printHand.cards[j].getColor() == Color.black) {
                 
@@ -100,13 +96,13 @@ public class Hand {
         int replaceCount = 0;
         Card temp = null;
         
-        while (i < sortHand.amount - 1) {
+        while (i < sortHand.getCards().length - 1) {
             
-            for (int j = i + 1; j < sortHand.amount; j++) {                
+            for (int j = i + 1; j < sortHand.getCards().length; j++) {                
                 
                 if (sortHand.cards[i].getColor().equals(sortHand.cards[j].getColor())) {
                     
-                    for (int k = i; k < sortHand.amount; k++) {
+                    for (int k = i; k < sortHand.getCards().length; k++) {
                         
                         if (!sortHand.cards[i].getColor().equals(sortHand.cards[k].getColor())) {
                             
@@ -129,7 +125,7 @@ public class Hand {
                   
         }
         
-        for (int j = 0; j < sortHand.amount - 1; j++) {
+        for (int j = 0; j < sortHand.getCards().length - 1; j++) {
             
             if (sortHand.cards[j].getColor().equals(sortHand.cards[j + 1].getColor())) {
                 
@@ -153,10 +149,10 @@ public class Hand {
     
     public static int[] interpret(Hand interpretHand) {
         
-        int[] exerciseNum = new int[5];
-        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0;
+        int[] exerciseNum = new int[6];
+        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0, breakNum = 0;
         
-        for (int i = 0; i < interpretHand.amount; i++) {
+        for (int i = 0; i < interpretHand.getCards().length; i++) {
             
             if (interpretHand.cards[i].getColor() == Color.black) {
                 
@@ -172,7 +168,13 @@ public class Hand {
                 
             }
             
-            if (interpretHand.cards[i].getValue() < 10) {
+            if (interpretHand.cards[i].getValue() == 0) {
+                
+                
+                
+            }
+            
+            if (interpretHand.cards[i].getValue() < 10 && interpretHand.cards[i].getValue() > 0) {
                 
                 if (interpretHand.cards[i].getColor() == Color.red) {
 
@@ -260,18 +262,26 @@ public class Hand {
         
         int multiFactor = 4 * wild4Count;
         burpee = (10 * wildCount) + (10 * wild4Count);
-        sitUp = sitUp * multiFactor;
-        pushUp = pushUp * multiFactor;
-        squat = squat * multiFactor;
-        lunge = lunge * multiFactor;
+        
+        if (multiFactor != 0) {
+            
+            sitUp = sitUp * multiFactor;
+            pushUp = pushUp * multiFactor;
+            squat = squat * multiFactor;
+            lunge = lunge * multiFactor;
+        
+        }
         
         exerciseNum[0] = pushUp;
         exerciseNum[1] = squat;
         exerciseNum[2] = sitUp;
         exerciseNum[3] = lunge;
         exerciseNum[4] = burpee;
+        exerciseNum[5] = breakNum;
         return exerciseNum;
         
     }
+    
+    
     
 }
