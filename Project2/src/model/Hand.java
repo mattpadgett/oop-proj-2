@@ -1,5 +1,4 @@
-/*
- * CS 2365 Object-Oriented Programming - Spring 2020
+/* CS 2365 Object-Oriented Programming - Spring 2020
  * Project 2 - UNO Excercises
  * File: Hand.java
  * Date: 2/15/2020
@@ -35,7 +34,7 @@ public class Hand {
     private Card[] cards;
     
     //Constructor
-    public Hand (Card[] cards) {
+    public Hand(Card[] cards) {
         
         this.id = nextId;
         this.nextId++;
@@ -271,6 +270,8 @@ public class Hand {
                 
             } else if (interpretHand.cards[i].getValue() == 12) {
                 
+                Deck obj = new Deck();
+                
                 if (interpretHand.cards[i].getColor() == Color.red) {
 
                     SitUpSkipNum = SitUpSkipNum + sitUp;
@@ -278,7 +279,7 @@ public class Hand {
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.red) {
+                        if (interpretHand.cards[j].getColor() == Color.red && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -287,7 +288,7 @@ public class Hand {
                         
                     }
                     
-                    addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 } else if (interpretHand.cards[i].getColor() == Color.blue) {
 
@@ -296,7 +297,7 @@ public class Hand {
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.blue) {
+                        if (interpretHand.cards[j].getColor() == Color.blue && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -305,7 +306,7 @@ public class Hand {
                         
                     }
                     
-                    addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 } else if (interpretHand.cards[i].getColor() == Color.yellow) {
 
@@ -314,7 +315,7 @@ public class Hand {
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.yellow) {
+                        if (interpretHand.cards[j].getColor() == Color.yellow && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -323,7 +324,7 @@ public class Hand {
                         
                     }
                     
-                    addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 } else if (interpretHand.cards[i].getColor() == Color.green) {
 
@@ -332,7 +333,7 @@ public class Hand {
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.green) {
+                        if (interpretHand.cards[j].getColor() == Color.green && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -341,7 +342,7 @@ public class Hand {
                         
                     }
                     
-                    addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 }
                 
@@ -377,9 +378,21 @@ public class Hand {
         skips[2] = SitUpSkipNum;
         skips[3] = LungeSkipNum;
         
-        updateStats(exerciseNum, skips);
-        
         return exerciseNum;
+        
+    }
+    
+    public static void printReps(int[] exerciseNum) {
+        
+        System.out.println("Push Ups:\t" + exerciseNum[0]);
+        System.out.println("Squats:\t\t" + exerciseNum[1]);
+        System.out.println("Sit Ups:\t" + exerciseNum[2]);
+        System.out.println("Lunges:\t\t" + exerciseNum[3]);
+        System.out.println("Burpees:\t" + exerciseNum[4]);
+        System.out.println("Push Up Breaks:\t" + exerciseNum[5]);
+        System.out.println("Squat Breaks:\t" + exerciseNum[6]);
+        System.out.println("Sit Ups Breaks:\t" + exerciseNum[7]);
+        System.out.println("Lunge Breaks:\t" + exerciseNum[8]);
         
     }
     
