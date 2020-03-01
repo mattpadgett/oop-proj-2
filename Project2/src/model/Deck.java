@@ -3,39 +3,26 @@
  * File: Deck.Java
  * Date: 02/15/2020
  * Author: Jason Luckow - jluckow - R11560069
- * Contributors: None
+ * Contributors: Matt Padgett - matpadge - R11564420 (Deck constructor)
  *
  * Description: To initialize and shuffle the deck, and to draw from the deck
  */
 
 package model;
 
-import java.util.Random;
 import java.awt.Color;
+import java.util.Random;
+import java.util.Arrays;
 
 public class Deck {
     
     //CREATE VARIABLES
-    int deckCardCount, topDeckIndex, numDecks, deckSize;
-    boolean connected, includeActionCards;
+    private int deckCardCount, topDeckIndex, numDecks, deckSize;
+    private boolean connected, includeActionCards;
     private Card[] cards;
     
     
-    //CONSTRUCTOR
-    public Deck (){
-        
-        this.deckCardCount = 0;
-        this.topDeckIndex = 0;  
-        this.numDecks = 1;
-        this.deckSize = 108;
-        this.cards = new Card[324];
-        this.connected = true;
-        this.includeActionCards = true;
-        
-    }
-    
-    
-    //CLASS
+    //CONSTRUCTOR   
     public Deck (int numDecks, boolean connected, boolean includeActionCards){
         
         Color c = Color.WHITE;
@@ -44,19 +31,23 @@ public class Deck {
         if (includeActionCards == false)
             rankIndex = 9; //LOWERS INDEX IF ACTION CARDS ARE TAKEN OUT
         
-        switch(numDecks) {
-            
-            case 1:
-                cards = new Card[108];
-                break;
-            case 2:
-                cards = new Card[216];
-                break;
-            case 3:
-                cards = new Card[324];
-                break;
-            
-        }
+        this.cards = new Card[108 * numDecks];
+        
+//        switch(numDecks) {
+//            
+//            case 1:
+//                this.cards = new Card[108];
+//                break;
+//            case 2:
+//                this.cards = new Card[216];
+//                break;
+//            case 3:
+//                this.cards = new Card[324];
+//                break;
+//            
+//        }
+        
+        Arrays.fill(cards, new Card(Color.MAGENTA, -1));
         
         for (int m = 0; m < numDecks; m++){
 
@@ -81,24 +72,38 @@ public class Deck {
                 
                 cards[arrayCounter] = new Card (c, 0);//ZERO ONLY HAS ONE RANK
                 arrayCounter++;  
-                cards[arrayCounter] = new Card (Color.BLACK, 13);//WILD
-                arrayCounter++;
-                cards[arrayCounter] = new Card (Color.BLACK, 14);//WILD DRAW FOUR
-                arrayCounter++;
+                
+                if(includeActionCards == true){
+                    
+                    cards[arrayCounter] = new Card (Color.BLACK, 13);//WILD
+                    arrayCounter++;
+                    cards[arrayCounter] = new Card (Color.BLACK, 14);//WILD DRAW FOUR
+                    arrayCounter++;
+                    
+                }
 
                 for (int k = 0; k < 2; k++){//EACH COLOR HAS TWO RANKS
 
-                    for (int i = 1; i < rankIndex; i++){//RANK LOOP
+                    for (int i = 1; i <= rankIndex; i++){//RANK LOOP
 
                         cards[arrayCounter] = new Card(c,i);
                         arrayCounter++;
                         
                     }    
                 }    
-            }   
+            }  
+            
+            if(connected == false){
+                
+                shuffle(cards);
+                
+            }
         }
-         
-        shuffle(cards);//SHUFFLES CARDS THAT WERE JUST CREATED
+        if(connected == true){
+            
+            shuffle(cards);//SHUFFLES CARDS THAT WERE JUST CREATED
+        
+        }
         this.setDeckSize(arrayCounter);//METHOD OVERLOADING
         this.setDeckCardCount(arrayCounter);//METHOD OVERLOADING
         this.setTopDeckIndex(arrayCounter);
@@ -157,8 +162,8 @@ public class Deck {
         Random rand = new Random();
         
         for(int t = 0; t < cards.length; t++){
-            
-            int randomIndexSwap = rand.nextInt((int)cards.length);
+            //System.out.println(cards[t].getValue());
+            int randomIndexSwap = rand.nextInt(cards.length);
             
             Card temp = cards[randomIndexSwap];
             cards[randomIndexSwap] = cards[t];
@@ -174,8 +179,8 @@ public class Deck {
         
         for (int h = 0; h < 7; h++){
             
-            drawForHand[h] = cards[getTopDeckIndex()];
-            cards[getTopDeckIndex()] = null;
+            drawForHand[h] = cards[getTopDeckIndex() - 1];
+            cards[getTopDeckIndex() - 1] = null;
             this.setTopDeckIndex(getTopDeckIndex() - 1);
             
         }
@@ -188,7 +193,7 @@ public class Deck {
         
         int sizeImport = cardsToBottom.length;
         
-        for(int m = cards.length; m >= 0; m--){
+        for(int m = getTopDeckIndex(); m >= 0; m--){
             
             cards[m + sizeImport] = cards[m];
             
@@ -208,19 +213,19 @@ public class Deck {
         
         deck.draw();
         
-        for(int i = 0; i < deck.getDeck().length; i++) {
-            
-            System.out.print(deck.getDeck()[i].getValue());
+        for(int i = 0; i < deck.getTopDeckIndex(); i++) {
+
+            System.out.print(deck.getDeck()[i].getValue() + ", ");
             
         }
         
         System.out.println();
         
-        Card[] cards = {new Card(Color.RED, 1), new Card(Color.BLUE, 2)};
+        Card[] botCard = {new Card(Color.RED, 9), new Card(Color.BLUE, 9)};
         
-        deck.addToBottom(cards);
+        deck.addToBottom(botCard);
         
-        for(int i = 0; i < deck.getDeck().length; i++) {
+        for(int i = 0; i < deck.getTopDeckIndex(); i++) {
             
             System.out.print(deck.getDeck()[i].getValue());
             
