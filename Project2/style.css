@@ -1,0 +1,27 @@
+:root {
+	--border-color: #0099CC;
+	--background-main: #2B2D2F;
+	--background-lighter: #5E6062;
+}
+
+* {
+	font-family: 'Roboto', sans-serif;
+	color: #FFFFFF;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.card {
+	background: var(--background-main);
+	width: 50%;
+	padding: 10px;
+	margin: auto;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+
+hr {
+	border: 2px solid var(--border-color);
+}
