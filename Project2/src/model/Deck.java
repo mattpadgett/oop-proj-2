@@ -44,6 +44,20 @@ public class Deck {
         if (includeActionCards == false)
             rankIndex = 9; //LOWERS INDEX IF ACTION CARDS ARE TAKEN OUT
         
+        switch(numDecks) {
+            
+            case 1:
+                cards = new Card[108];
+                break;
+            case 2:
+                cards = new Card[216];
+                break;
+            case 3:
+                cards = new Card[324];
+                break;
+            
+        }
+        
         for (int m = 0; m < numDecks; m++){
 
             for (int j = 0; j < 4; j++){ //LOOP FOR EACH COLOR
@@ -64,7 +78,7 @@ public class Deck {
                         break;  
                         
                 }
-
+                
                 cards[arrayCounter] = new Card (c, 0);//ZERO ONLY HAS ONE RANK
                 arrayCounter++;  
                 cards[arrayCounter] = new Card (Color.BLACK, 13);//WILD
@@ -111,6 +125,11 @@ public class Deck {
         
     }
     
+    public Card[] getDeck() {
+        
+        return cards;
+        
+    }
     
     //SETTERS
     public void setDeckCardCount(int deckCardCount){
@@ -139,7 +158,7 @@ public class Deck {
         
         for(int t = 0; t < cards.length; t++){
             
-            int randomIndexSwap = rand.nextInt(cards.length);
+            int randomIndexSwap = rand.nextInt((int)cards.length);
             
             Card temp = cards[randomIndexSwap];
             cards[randomIndexSwap] = cards[t];
@@ -156,12 +175,57 @@ public class Deck {
         for (int h = 0; h < 7; h++){
             
             drawForHand[h] = cards[getTopDeckIndex()];
+            cards[getTopDeckIndex()] = null;
             this.setTopDeckIndex(getTopDeckIndex() - 1);
+            
+        }
+    
+        return new Hand(drawForHand);
+        
+    }
+    
+    public void addToBottom(Card[] cardsToBottom){
+        
+        int sizeImport = cardsToBottom.length;
+        
+        for(int m = cards.length; m >= 0; m--){
+            
+            cards[m + sizeImport] = cards[m];
+            
+        }
+        
+        for(int r = 0; r < sizeImport; r++){
+            
+            cards[r] = cardsToBottom[r];
             
         }
         
     }
     
-    return new Hand(drawForHand);
+    public static void main(String[] args) {
+        
+        Deck deck = new Deck(1, false, true);
+        
+        deck.draw();
+        
+        for(int i = 0; i < deck.getDeck().length; i++) {
+            
+            System.out.print(deck.getDeck()[i].getValue());
+            
+        }
+        
+        System.out.println();
+        
+        Card[] cards = {new Card(Color.RED, 1), new Card(Color.BLUE, 2)};
+        
+        deck.addToBottom(cards);
+        
+        for(int i = 0; i < deck.getDeck().length; i++) {
+            
+            System.out.print(deck.getDeck()[i].getValue());
+            
+        }
+        
+    }
     
 }
