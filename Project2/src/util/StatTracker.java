@@ -5,7 +5,7 @@
  * Author: Brent Williams - wil94836 - R11630670
  * Contributors: None.
  *
- * Description: A ultility to keep tracker of data gathered from the game.
+ * Description: A utility to keep tracker of data gathered from the game.
 */
 package util; // part of util package
 import model.Hand; // importing the hand class
@@ -14,10 +14,10 @@ import model.Hand; // importing the hand class
 
 public class StatTracker { // start of StatTracker class
     
-    // Use 2 integer arrays for reps and skips.
-    private int reps[] = new int[7]; // INDEX LABELS: 0 - Pushups, 1 - Squat, 2 - Situp, 3 - Lunges, 4 - Burpees
+    // Use 3 integer arrays for reps, biggest amount of reps in one hand and skips.
+    private int reps[] = new int[5]; // INDEX LABELS: 0 - Pushups, 1 - Squat, 2 - Situp, 3 - Lunges, 4 - Burpees
     private int skips[] = new int[5];
-    private String name[] = new String[7];
+    private String name[] = new String[5];
     private int biggestReps[] = new int[5];
     
     
@@ -107,6 +107,15 @@ public class StatTracker { // start of StatTracker class
     // Methods
     public void updateStats(int [] newReps, int [] newSkips)
     {
-        
+        // For newReps, go through 0-4 if new reps has a bigger value than biggest reps is found, assign it to biggestReps
+        for(int i = 0; i < 5; i++)
+        {
+            if(newReps[i] > biggestReps[i])
+            {
+                biggestReps[i] = newReps[i];
+            }
+            reps[i] += newReps[i]; // accumulates reps total
+            skips[i] += newSkips[i]; // accumulates skips total
+        }
     } // end of updateStats
 } // end of StatTracker class
