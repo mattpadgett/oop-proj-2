@@ -28,7 +28,7 @@ public class HTMLWriter {
         FileWriter o = null;
         File outputFile = new File("HTMLOutput.html");
         
-        int[] reps = Hand.interpret(hand);
+        int[] reps = hand.interpret();
         
         try {
             

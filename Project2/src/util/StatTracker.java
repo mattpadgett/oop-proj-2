@@ -23,50 +23,20 @@ public class StatTracker { // start of StatTracker class
     
     public StatTracker() // Stat Tracker Constructor to intialize attributes
     {
-        for(int i = 0; i < 7; i++)
+        
+        this.name[0] = "Pushups";
+        this.name[1] = "Squats";
+        this.name[2] = "Situps";
+        this.name[3] = "Lunges";
+        this.name[4] = "Burpees";
+        
+        for(int i = 0; i < 5; i++)
         {
             this.reps[i] = 0;
             this.skips[i] = 0;
             this.biggestReps[i] = 0;
-            if(i == 0)
-            {
-                this.name[i] = "Pushups";
-            }
-            else if(i == 1)
-            {
-                this.name[i] = "Squats";
-            }
-            else if(i == 2)
-            {
-                this.name[i] = "Sit-ups";
-            }
-            else if(i == 3)
-            {
-                this.name[i] = "Lunges";
-            }
-            else if(i == 4)
-            {
-                this.name[i] = "Burpees";
-            }
-            else if(i == 5)
-            {
-                this.name[i] = "NumOf1MinBreaks";
-            }
-            else if(i == 6)
-            {
-                this.name[i] = "Skips";
-            }
         }
-    }
-    public StatTracker(boolean hasAction) // Stat Tracker Constructor with hasAction as an arguement
-    {
-        if(!hasAction) // if deck of cards do not have action cards, set burpee stats to zero
-        {
-            this.reps[4] = 0;
-            this.skips[4] = 0;
-            this.biggestReps[4] = 0;
-            this.name[4] = "Burpees";
-        }
+        
     }
    
      // Getters/Accesor
@@ -115,7 +85,13 @@ public class StatTracker { // start of StatTracker class
                 biggestReps[i] = newReps[i];
             }
             reps[i] += newReps[i]; // accumulates reps total
+            
+        }
+        
+        for(int i = 0; i < 4; i++) {
+            
             skips[i] += newSkips[i]; // accumulates skips total
+            
         }
     } // end of updateStats
 } // end of StatTracker class

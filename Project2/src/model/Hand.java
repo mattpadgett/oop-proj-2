@@ -8,6 +8,7 @@
  */
 package model;
 
+import Main.Game;
 import java.awt.Color;
 import java.util.Random;
 
@@ -32,13 +33,15 @@ public class Hand {
     private static int nextId = 1;
     private int id;
     private Card[] cards;
+    private Game game;
     
     //Constructor
-    public Hand(Card[] cards) {
+    public Hand(Card[] cards, Game game) {
         
         this.id = nextId;
         this.nextId++;
         this.cards = cards;
+        this.game = game;
         
     }
     
@@ -58,6 +61,7 @@ public class Hand {
     
     public static void printHand(Hand printHand) {
         
+        System.out.println("\nHand ID: " + printHand.id);
         System.out.println("Color:\t\tValue:");
            
         for (int j = 0; j < printHand.getCards().length; j++) {
@@ -87,8 +91,6 @@ public class Hand {
             System.out.println(printHand.cards[j].getValue());
             
         }
-        
-        System.out.println("\nHand ID: " + printHand.id);
         
     }
     
@@ -150,7 +152,7 @@ public class Hand {
         
     }
     
-    public static int[] interpret(Hand interpretHand) {
+    public int[] interpret() {
         
         int[] exerciseNum = new int[9];
         Card[] botPile = new Card[6];
@@ -158,15 +160,17 @@ public class Hand {
         int PushUpSkipNum = 0, SitUpSkipNum = 0, SquatSkipNum = 0, LungeSkipNum = 0, count = 0;
         int PushUpBreakNum = 0, SitUpBreakNum = 0, SquatBreakNum = 0, LungeBreakNum = 0;
         
-        for (int i = 0; i < interpretHand.getCards().length; i++) {
+        sort(this);
+        
+        for (int i = 0; i < cards.length; i++) {
             
-            if (interpretHand.cards[i].getColor() == Color.black) {
+            if (cards[i].getColor() == Color.black) {
                 
-                if (interpretHand.cards[i].getValue() == 13) {
+                if (cards[i].getValue() == 13) {
                     
                     wildCount++;
     
-                } else if (interpretHand.cards[i].getValue() == 14) {
+                } else if (cards[i].getValue() == 14) {
                     
                     wild4Count++;
                     
@@ -174,27 +178,27 @@ public class Hand {
                 
             }
             
-            if (interpretHand.cards[i].getValue() == 0) {
+            if (cards[i].getValue() == 0) {
                 
-                if (interpretHand.cards[i].getColor() == Color.red) {
+                if (cards[i].getColor() == Color.red) {
                     
                     PushUpBreakNum++;
                     
                 }
                 
-                if (interpretHand.cards[i].getColor() == Color.yellow) {
+                if (cards[i].getColor() == Color.yellow) {
                     
                     SquatBreakNum++;
                     
                 }
                 
-                if (interpretHand.cards[i].getColor() == Color.blue) {
+                if (cards[i].getColor() == Color.blue) {
                     
                     SitUpBreakNum++;
                     
                 }
                 
-                if (interpretHand.cards[i].getColor() == Color.green) {
+                if (cards[i].getColor() == Color.green) {
                     
                     LungeBreakNum++;
                     
@@ -202,147 +206,143 @@ public class Hand {
                 
             }
             
-            if (interpretHand.cards[i].getValue() < 10 && interpretHand.cards[i].getValue() > 0) {
+            if (cards[i].getValue() < 10 && cards[i].getValue() > 0) {
                 
-                if (interpretHand.cards[i].getColor() == Color.red) {
+                if (cards[i].getColor() == Color.red) {
 
-                    sitUp = sitUp + interpretHand.cards[i].getValue();
+                    sitUp = sitUp + cards[i].getValue();
                     
-                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+                } else if (cards[i].getColor() == Color.blue) {
 
-                    pushUp = pushUp + interpretHand.cards[i].getValue();
+                    pushUp = pushUp + cards[i].getValue();
                     
-                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+                } else if (cards[i].getColor() == Color.yellow) {
 
-                    squat = squat + interpretHand.cards[i].getValue();
+                    squat = squat + cards[i].getValue();
                     
-                } else if (interpretHand.cards[i].getColor() == Color.green) {
+                } else if (cards[i].getColor() == Color.green) {
 
-                    lunge = lunge + interpretHand.cards[i].getValue();
+                    lunge = lunge + cards[i].getValue();
                     
                 }
                     
-            }
-            
-            else if (interpretHand.cards[i].getValue() == 10) {
+            } else if (cards[i].getValue() == 10) {
                 
-                if (interpretHand.cards[i].getColor() == Color.red) {
+                if (cards[i].getColor() == Color.red) {
 
                     SitUpSkipNum = SitUpSkipNum + sitUp;
                     sitUp = 0;
                     
-                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+                } else if (cards[i].getColor() == Color.blue) {
 
                     PushUpSkipNum = PushUpSkipNum + pushUp;
                     pushUp = 0;
                     
-                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+                } else if (cards[i].getColor() == Color.yellow) {
 
                     SquatSkipNum = SquatSkipNum + squat;
                     squat = 0;
                     
-                } else if (interpretHand.cards[i].getColor() == Color.green) {
+                } else if (cards[i].getColor() == Color.green) {
 
                     LungeSkipNum = LungeSkipNum + lunge;
                     lunge = 0;
                     
                 }
                 
-            } else if (interpretHand.cards[i].getValue() == 11) {
+            } else if (cards[i].getValue() == 11) {
                 
-                if (interpretHand.cards[i].getColor() == Color.red) {
+                if (cards[i].getColor() == Color.red) {
 
                     sitUp = sitUp * 2;
                     
-                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+                } else if (cards[i].getColor() == Color.blue) {
 
                     pushUp = pushUp * 2;
                     
-                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+                } else if (cards[i].getColor() == Color.yellow) {
 
                     squat = squat * 2;
                     
-                } else if (interpretHand.cards[i].getColor() == Color.green) {
+                } else if (cards[i].getColor() == Color.green) {
 
                     lunge = lunge * 2;
                     
                 }
                 
-            } else if (interpretHand.cards[i].getValue() == 12) {
+            } else if (cards[i].getValue() == 12) {
                 
-                Deck obj = new Deck();
-                
-                if (interpretHand.cards[i].getColor() == Color.red) {
+                if (cards[i].getColor() == Color.red) {
 
                     SitUpSkipNum = SitUpSkipNum + sitUp;
                     sitUp = 0;
                     
-                    for (int j = 0; j < interpretHand.cards.length; j++) {
+                    for (int j = 0; j < cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.red && interpretHand.cards[j].getValue() != 12) {
+                        if (cards[j].getColor() == Color.red && cards[j].getValue() != 12) {
                             
-                            botPile[count] = interpretHand.cards[j];
+                            botPile[count] = cards[j];
                             count++;
                             
                         }
                         
                     }
                     
-                    obj.addToBottom(botPile);
+                    game.getDeck().addToBottom(botPile);
                     
-                } else if (interpretHand.cards[i].getColor() == Color.blue) {
+                } else if (cards[i].getColor() == Color.blue) {
 
                     PushUpSkipNum = PushUpSkipNum + pushUp;
                     pushUp = 0;
                     
-                    for (int j = 0; j < interpretHand.cards.length; j++) {
+                    for (int j = 0; j < cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.blue && interpretHand.cards[j].getValue() != 12) {
+                        if (cards[j].getColor() == Color.blue && cards[j].getValue() != 12) {
                             
-                            botPile[count] = interpretHand.cards[j];
+                            botPile[count] = cards[j];
                             count++;
                             
                         }
                         
                     }
                     
-                    obj.addToBottom(botPile);
+                    game.getDeck().addToBottom(botPile);
                     
-                } else if (interpretHand.cards[i].getColor() == Color.yellow) {
+                } else if (cards[i].getColor() == Color.yellow) {
 
                     SquatSkipNum = SquatSkipNum + squat;
                     squat = 0;
                     
-                    for (int j = 0; j < interpretHand.cards.length; j++) {
+                    for (int j = 0; j < cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.yellow && interpretHand.cards[j].getValue() != 12) {
+                        if (cards[j].getColor() == Color.yellow && cards[j].getValue() != 12) {
                             
-                            botPile[count] = interpretHand.cards[j];
+                            botPile[count] = cards[j];
                             count++;
                             
                         }
                         
                     }
                     
-                    obj.addToBottom(botPile);
+                    game.getDeck().addToBottom(botPile);
                     
-                } else if (interpretHand.cards[i].getColor() == Color.green) {
+                } else if (cards[i].getColor() == Color.green) {
 
                     LungeSkipNum = LungeSkipNum + lunge;
                     lunge = 0;
                     
-                    for (int j = 0; j < interpretHand.cards.length; j++) {
+                    for (int j = 0; j < cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.green && interpretHand.cards[j].getValue() != 12) {
+                        if (cards[j].getColor() == Color.green && cards[j].getValue() != 12) {
                             
-                            botPile[count] = interpretHand.cards[j];
+                            botPile[count] = cards[j];
                             count++;
                             
                         }
                         
                     }
                     
-                    obj.addToBottom(botPile);
+                    game.getDeck().addToBottom(botPile);
                     
                 }
                 
@@ -377,6 +377,8 @@ public class Hand {
         skips[1] = SquatSkipNum;
         skips[2] = SitUpSkipNum;
         skips[3] = LungeSkipNum;
+        
+        this.game.getStatTracker().updateStats(exerciseNum, skips);
         
         return exerciseNum;
         

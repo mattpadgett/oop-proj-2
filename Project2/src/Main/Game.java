@@ -1,3 +1,5 @@
+package Main;
+
 /* CS 2365 Object-Oriented Programming - Spring 2020
  * Project 2 - UNO Exercises
  * File: Game.java
@@ -22,15 +24,15 @@ public class Game {
     public Game(boolean hasAction, boolean shuffleTogether, int deckNum) {
         
         statTracker = new StatTracker();
-        this.deck = new Deck(deckNum, shuffleTogether, hasAction);
+        this.deck = new Deck(deckNum, shuffleTogether, hasAction, this);
         
     }
     
-    public int[] getNextHand() {
+    public Hand getNextHand() {
         
-        if (deck != null) {
+        if (this.deck != null) {
             
-            return Hand.interpret(deck.draw());
+            return this.deck.draw();
             
         } else {
             
@@ -40,6 +42,16 @@ public class Game {
         
     }
     
+    public StatTracker getStatTracker() {
+        
+        return statTracker;
+        
+    } 
     
+    public Deck getDeck() {
+        
+        return deck;
+        
+    }
     
 }
