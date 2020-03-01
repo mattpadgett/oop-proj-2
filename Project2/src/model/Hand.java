@@ -1,5 +1,4 @@
-/*
- * CS 2365 Object-Oriented Programming - Spring 2020
+/* CS 2365 Object-Oriented Programming - Spring 2020
  * Project 2 - UNO Excercises
  * File: Hand.java
  * Date: 2/15/2020
@@ -35,7 +34,7 @@ public class Hand {
     private Card[] cards;
     
     //Constructor
-    public Hand (Card[] cards) {
+    public Hand(Card[] cards) {
         
         this.id = nextId;
         this.nextId++;
@@ -92,6 +91,7 @@ public class Hand {
         System.out.println("\nHand ID: " + printHand.id);
         
     }
+    
     //Sorts hand by color and rank
     public static Hand sort(Hand sortHand) {
         
@@ -152,9 +152,11 @@ public class Hand {
     
     public static int[] interpret(Hand interpretHand) {
         
-        int[] exerciseNum = new int[6];
+        int[] exerciseNum = new int[9];
         Card[] botPile = new Card[6];
-        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0, breakNum = 0, skipNum = 0, count = 0;
+        int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0;
+        int PushUpSkipNum = 0, SitUpSkipNum = 0, SquatSkipNum = 0, LungeSkipNum = 0, count = 0;
+        int PushUpBreakNum = 0, SitUpBreakNum = 0, SquatBreakNum = 0, LungeBreakNum = 0;
         
         for (int i = 0; i < interpretHand.getCards().length; i++) {
             
@@ -174,7 +176,29 @@ public class Hand {
             
             if (interpretHand.cards[i].getValue() == 0) {
                 
-                breakNum = breakNum + 1;
+                if (interpretHand.cards[i].getColor() == Color.red) {
+                    
+                    PushUpBreakNum++;
+                    
+                }
+                
+                if (interpretHand.cards[i].getColor() == Color.yellow) {
+                    
+                    SquatBreakNum++;
+                    
+                }
+                
+                if (interpretHand.cards[i].getColor() == Color.blue) {
+                    
+                    SitUpBreakNum++;
+                    
+                }
+                
+                if (interpretHand.cards[i].getColor() == Color.green) {
+                    
+                    LungeBreakNum++;
+                    
+                }
                 
             }
             
@@ -204,22 +228,22 @@ public class Hand {
                 
                 if (interpretHand.cards[i].getColor() == Color.red) {
 
-                    skipNum = skipNum + sitUp;
+                    SitUpSkipNum = SitUpSkipNum + sitUp;
                     sitUp = 0;
                     
                 } else if (interpretHand.cards[i].getColor() == Color.blue) {
 
-                    skipNum = skipNum + pushUp;
+                    PushUpSkipNum = PushUpSkipNum + pushUp;
                     pushUp = 0;
                     
                 } else if (interpretHand.cards[i].getColor() == Color.yellow) {
 
-                    skipNum = skipNum + squat;
+                    SquatSkipNum = SquatSkipNum + squat;
                     squat = 0;
                     
                 } else if (interpretHand.cards[i].getColor() == Color.green) {
 
-                    skipNum = skipNum + lunge;
+                    LungeSkipNum = LungeSkipNum + lunge;
                     lunge = 0;
                     
                 }
@@ -246,13 +270,16 @@ public class Hand {
                 
             } else if (interpretHand.cards[i].getValue() == 12) {
                 
+                Deck obj = new Deck();
+                
                 if (interpretHand.cards[i].getColor() == Color.red) {
 
+                    SitUpSkipNum = SitUpSkipNum + sitUp;
                     sitUp = 0;
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.red) {
+                        if (interpretHand.cards[j].getColor() == Color.red && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -261,15 +288,16 @@ public class Hand {
                         
                     }
                     
-                    //addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 } else if (interpretHand.cards[i].getColor() == Color.blue) {
 
+                    PushUpSkipNum = PushUpSkipNum + pushUp;
                     pushUp = 0;
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.blue) {
+                        if (interpretHand.cards[j].getColor() == Color.blue && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -278,15 +306,16 @@ public class Hand {
                         
                     }
                     
-                    //addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 } else if (interpretHand.cards[i].getColor() == Color.yellow) {
 
+                    SquatSkipNum = SquatSkipNum + squat;
                     squat = 0;
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.yellow) {
+                        if (interpretHand.cards[j].getColor() == Color.yellow && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -295,15 +324,16 @@ public class Hand {
                         
                     }
                     
-                    //addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 } else if (interpretHand.cards[i].getColor() == Color.green) {
 
+                    LungeSkipNum = LungeSkipNum + lunge;
                     lunge = 0;
                     
                     for (int j = 0; j < interpretHand.cards.length; j++) {
                         
-                        if (interpretHand.cards[j].getColor() == Color.green) {
+                        if (interpretHand.cards[j].getColor() == Color.green && interpretHand.cards[j].getValue() != 12) {
                             
                             botPile[count] = interpretHand.cards[j];
                             count++;
@@ -312,7 +342,7 @@ public class Hand {
                         
                     }
                     
-                    //addToBottom(botPile);
+                    obj.addToBottom(botPile);
                     
                 }
                 
@@ -337,7 +367,17 @@ public class Hand {
         exerciseNum[2] = sitUp;
         exerciseNum[3] = lunge;
         exerciseNum[4] = burpee;
-        exerciseNum[5] = breakNum;
+        exerciseNum[5] = PushUpBreakNum;
+        exerciseNum[6] = SquatBreakNum;
+        exerciseNum[7] = SitUpBreakNum;
+        exerciseNum[8] = LungeBreakNum;
+        
+        int[] skips = new int[4];
+        skips[0] = PushUpSkipNum;
+        skips[1] = SquatSkipNum;
+        skips[2] = SitUpSkipNum;
+        skips[3] = LungeSkipNum;
+        
         return exerciseNum;
         
     }
@@ -349,8 +389,10 @@ public class Hand {
         System.out.println("Sit Ups:\t" + exerciseNum[2]);
         System.out.println("Lunges:\t\t" + exerciseNum[3]);
         System.out.println("Burpees:\t" + exerciseNum[4]);
-        System.out.println("Number of 1 Min Breaks:\t" + exerciseNum[5]);
-        System.out.println("Number of " + "\n\n\n\n");
+        System.out.println("Push Up Breaks:\t" + exerciseNum[5]);
+        System.out.println("Squat Breaks:\t" + exerciseNum[6]);
+        System.out.println("Sit Ups Breaks:\t" + exerciseNum[7]);
+        System.out.println("Lunge Breaks:\t" + exerciseNum[8]);
         
     }
     
