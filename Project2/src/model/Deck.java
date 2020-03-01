@@ -44,9 +44,9 @@ public class Deck {
         if (includeActionCards == false)
             rankIndex = 9; //LOWERS INDEX IF ACTION CARDS ARE TAKEN OUT
         
-        for (int m = 0; m <= numDecks; m++){
+        for (int m = 0; m < numDecks; m++){
 
-            for (int j = 0; j <= 4; j++){ //LOOP FOR EACH COLOR
+            for (int j = 0; j < 4; j++){ //LOOP FOR EACH COLOR
 
                 switch (j){
 
@@ -72,9 +72,9 @@ public class Deck {
                 cards[arrayCounter] = new Card (Color.BLACK, 14);//WILD DRAW FOUR
                 arrayCounter++;
 
-                for (int k = 0; k <= 2; k++){//EACH COLOR HAS TWO RANKS
+                for (int k = 0; k < 2; k++){//EACH COLOR HAS TWO RANKS
 
-                    for (int i = 1; i <= rankIndex; i++){//RANK LOOP
+                    for (int i = 1; i < rankIndex; i++){//RANK LOOP
 
                         cards[arrayCounter] = new Card(c,i);
                         arrayCounter++;
@@ -87,6 +87,7 @@ public class Deck {
         shuffle(cards);//SHUFFLES CARDS THAT WERE JUST CREATED
         this.setDeckSize(arrayCounter);//METHOD OVERLOADING
         this.setDeckCardCount(arrayCounter);//METHOD OVERLOADING
+        this.setTopDeckIndex(arrayCounter);
         
     }
     
@@ -147,8 +148,20 @@ public class Deck {
         }
     }
     
-    public void draw(){
-  
+    public Hand draw(){
+        
+        Card[] drawForHand;
+        drawForHand = new Card[7];
+        
+        for (int h = 0; h < 7; h++){
+            
+            drawForHand[h] = cards[getTopDeckIndex()];
+            this.setTopDeckIndex(getTopDeckIndex() - 1);
+            
+        }
+        
     }
+    
+    return new Hand(drawForHand);
     
 }
