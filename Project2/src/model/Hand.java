@@ -101,25 +101,25 @@ public class Hand {
         int replaceCount = 0;
         Card temp = null;
         
-        while (i < sortHand.getCards().length - 1) {
+        while (i < sortHand.getCards().length) {
             
             for (int j = i + 1; j < sortHand.getCards().length; j++) {                
                 
-                if (sortHand.cards[i].getColor().equals(sortHand.cards[j].getColor())) {
+                if (!sortHand.cards[i].getColor().equals(sortHand.cards[j].getColor())) {
                     
-                    for (int k = i; k < sortHand.getCards().length; k++) {
+                    for (int k = j; k < sortHand.getCards().length; k++) {
                         
-                        if (!sortHand.cards[i].getColor().equals(sortHand.cards[k].getColor())) {
+                        if (sortHand.cards[i].getColor().equals(sortHand.cards[k].getColor())) {
                             
                             temp = sortHand.cards[j];
                             sortHand.cards[j] = sortHand.cards[k];
                             sortHand.cards[k] = temp;
-                        
+                            j++;
+                            replaceCount++;
+                            
                         }
                     
                     }
-                    
-                    replaceCount++;
                     
                 }
                 

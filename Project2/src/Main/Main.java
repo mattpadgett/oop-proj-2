@@ -28,7 +28,7 @@ public class Main {
         
         int input = -1;
         
-        /*while(input != 0) {
+        while(input != 0) {
         
             System.out.println("\tUNO Exercise Generator!!");
             System.out.println("------------------------------------------------");
@@ -55,6 +55,12 @@ public class Main {
         boolean shuffleTogether = false;
         boolean actionCards = true;
         
+        if(input == 0) {
+            
+            System.exit(0);
+            
+        }
+        
         if(input == 1) {
             
             System.out.print("How many decks would you like to use? (1 - 3) ");
@@ -65,10 +71,10 @@ public class Main {
             actionCards = (sc.nextInt() == 1);
             
             
-        }*/
+        }
         
-        //Game game = new Game(actionCards, shuffleTogether, numDecks);
-        Game game = new Game(true, true, 1);
+        Game game = new Game(actionCards, shuffleTogether, numDecks);
+        //Game game = new Game(true, true, 1);
         HTMLWriter.beginOutputFile();
         
         while(true) {

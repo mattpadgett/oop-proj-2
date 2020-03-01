@@ -69,7 +69,7 @@ public class Deck {
                     arrayCounter++;
                     
                 }
-
+                System.out.println(rankIndex);
                 for (int k = 0; k < 2; k++){//EACH COLOR HAS TWO RANKS
 
                     for (int i = 1; i <= rankIndex; i++){//RANK LOOP
@@ -96,9 +96,25 @@ public class Deck {
         
         }
         
+        
+        
         this.setDeckSize(arrayCounter);//METHOD OVERLOADING
         this.setDeckCardCount(arrayCounter);//METHOD OVERLOADING
         this.setTopDeckIndex(arrayCounter);
+        
+        printDeck(this);
+        
+    }
+    
+    public static void printDeck(Deck deck) {
+        
+        System.out.println("Color:\t\tValue:");
+           
+        for(int i = 0; i < deck.getTopDeckIndex(); i++) {
+            
+            System.out.println(deck.getDeck()[i].getColor().toString() + "\t" + deck.getDeck()[i].getValue());
+            
+        }
         
     }
     
@@ -225,6 +241,8 @@ public class Deck {
             }
             
         }
+        
+       printDeck(this);
         
     }
     
