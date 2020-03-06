@@ -15,7 +15,7 @@ import java.awt.Color;
 
 /**
  *
- * @author matt
+ * @author Christian Pennington - R11445847
  */
 public class Card {
     
@@ -23,9 +23,9 @@ public class Card {
     private int cardValue;
     
     /**
-     *
-     * @param cardColor
-     * @param cardValue
+     * Creates the Card class to be used in the project. 
+     * @param cardColor - this parameter takes in the card color
+     * @param cardValue - this parameter takes in the card value
      */
     public Card (Color cardColor, int cardValue){
         this.cardColor = cardColor;
@@ -33,16 +33,16 @@ public class Card {
     }
         
     /**
-     *
-     * @return
+     * This is to get the color of the card
+     * @return the color of the card
      */
     public Color getColor() {
         return cardColor;
     }
     
     /**
-     *
-     * @return
+     * This is to get the value of the card
+     * @return the value of the card
      */
     public int getValue(){
         return cardValue;
