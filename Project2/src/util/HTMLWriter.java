@@ -21,30 +21,133 @@ import java.util.logging.Logger;
 import model.Card;
 import model.Hand;
 
+/**
+ *
+ * @author matt
+ */
 public class HTMLWriter {
     
-    public static void appendHand(Hand hand) {
+    private Main.Main main;
+    private File outputFile;
+    
+    /**
+     * HTMLWriter constructor to initialize any objects and variables needed.
+     * @param outputFile File object for storing the output of the code.
+     * @param main Reference to the Main object.
+     */
+    public HTMLWriter(File outputFile, Main.Main main) {
+        
+        this.outputFile = outputFile;
+        this.main = main;
+        
+        outputFile.delete();
+        
+    }
+    
+    /**
+     * Function to append a Hand from the Game class to the HTML output file.
+     * @param hand Hand object from the Game class.
+     */
+    public void appendHand(Hand hand) {
         
         FileWriter o = null;
-        File outputFile = new File("HTMLOutput.html");
         
         int[] reps = hand.interpret();
         
         try {
             
-            o = new FileWriter(outputFile, true);
+            o = new FileWriter(this.outputFile, true);
+         
+            o.write("<div class = 'hand'>");
+                                                 
+            o.write("<h2>Hand " + hand.getId()  + "</h2>");
+            o.write("<p>Cards Remaining: " + this.main.getGame().getDeck().getTopDeckIndex() + "</p><hr/>");
             
-            o.write("<div class = 'card'>");
-            
-            o.write("<h2>Hand " + hand.getId()  + "</h2><hr/><ul>");
+            for(int i = 0; i < hand.getCards().length; i++) {
 
-                o.write("<li>Pushups: " + reps[0] + "</li>");
-                o.write("<li>Squats: " + reps[1] + "</li>");
-                o.write("<li>Situps: " + reps[2] + "</li>");
-                o.write("<li>Lunges: " + reps[3] + "</li>");
-                o.write("<li>Burpees: " + reps[4] + "</li>");    
+                String output = "";
+
+                if(hand.getCards()[i].getColor().equals(Color.BLACK)) {
+
+                    output = "<div class = 'card'><div class = 'inner black'><span class = 'number'>[NUM]</span></div></div>";
+
+                }
+
+                if(hand.getCards()[i].getColor().equals(Color.BLUE)) {
+
+                   output = "<div class = 'card'><div class = 'inner blue'><span class = 'number'>[NUM]</span></div></div>";
+
+                }
+
+                if(hand.getCards()[i].getColor().equals(Color.RED)) {
+
+                    output = "<div class = 'card'><div class = 'inner red'><span class = 'number'>[NUM]</span></div></div>";
+
+                }
+
+                if(hand.getCards()[i].getColor().equals(Color.YELLOW)) {
+
+                    output = "<div class = 'card'><div class = 'inner yellow'><span class = 'number'>[NUM]</span></div></div>";
+
+                }
+
+                if(hand.getCards()[i].getColor().equals(Color.GREEN)) {
+
+                    output = "<div class = 'card'><div class = 'inner green'><span class = 'number'>[NUM]</span></div></div>";
+
+                }
+
+                if(hand.getCards()[i].getValue() < 10) {
+
+                    output = output.replace("[NUM]", String.valueOf(hand.getCards()[i].getValue()));
+
+                }
+
+                if(hand.getCards()[i].getValue() == 10) {
+
+                    output = output.replace("span class = 'number'>", "span class = 'number' style = 'top: 50%'>");
+                    output = output.replace("[NUM]", "\u20E0");
+
+                }
+
+                if(hand.getCards()[i].getValue() == 11) {
+
+                    output = output.replace("span class = 'number'>", "span class = 'number' style = 'font-size: 50px; top: 80%;'>");
+                    output = output.replace("[NUM]", "D2");
+
+                }
+
+                if(hand.getCards()[i].getValue() == 12) {
+
+                    output = output.replace("span class = 'number'>", "span class = 'number' style = 'top: 50%'>");
+                    output = output.replace("[NUM]", "\u27F2");
+
+                }
+
+                if(hand.getCards()[i].getValue() == 13) {
+
+                    output = output.replace("[NUM]", "W");
+
+                }
+
+                if(hand.getCards()[i].getValue() == 14) {
+
+                    output = output.replace("span class = 'number'>", "span class = 'number' style = 'font-size: 50px; top: 80%;'>");
+                    output = output.replace("[NUM]", "W4");
+
+                }
+
+                o.write(output);
+
+            }
             
-            o.write("</ul></div>");
+            o.write("<ul><li>Pushups: " + reps[0] + "</li>");
+            o.write("<li>Squats: " + reps[1] + "</li>");
+            o.write("<li>Situps: " + reps[2] + "</li>");
+            o.write("<li>Lunges: " + reps[3] + "</li>");
+            o.write("<li>Burpees: " + reps[4] + "</li></ul>");
+            
+            o.write("</div>");
             
             
             o.close();
@@ -57,16 +160,21 @@ public class HTMLWriter {
         
     }
     
-    public static void appendFinalStats(StatTracker stats) {
+    /**
+     * Function to append the final statistics to the HTML file before closing the output.
+     * @param stats StatTracker object from Game.
+     */
+    public void appendFinalStats(StatTracker stats) {
         
         FileWriter output = null;
-        File outputFile = new File("HTMLOutput.html");
         
         try {
             
-            output = new FileWriter(outputFile, true);
+            output = new FileWriter(this.outputFile, true);
             
-            output.write("<div class = 'card'><h2>Final Statistics</h2><hr/>");
+            output.write("<div class = 'hand' id = 'final'><h2>Final Statistics</h2>");
+            output.write("<a href = '#top'>Jump to Top</a>");
+            output.write("<hr/>");
             output.write("<p>Repetitions per Exercise</p>");
             output.write("<ul>");
             output.write("<li>Pushups: " + stats.getReps()[0] + "</li>");
@@ -74,35 +182,25 @@ public class HTMLWriter {
             output.write("<li>Situps: " + stats.getReps()[2] + "</li>");
             output.write("<li>Lunges: " + stats.getReps()[3] + "</li>");
             output.write("<li>Burpees: " + stats.getReps()[4] + "</li>");            
-            output.write("</ul></div>");
-            output.close();
+            output.write("</ul>");
             
-        } catch (IOException ex) {
+            output.write("<ul>");
+            output.write("<p>Total Repetitions per Execise Skipped</p>");
+            output.write("<li>Pushups: " + stats.getSkips()[0] + "</li>");
+            output.write("<li>Squats: " + stats.getSkips()[1] + "</li>");
+            output.write("<li>Situps: " + stats.getSkips()[2] + "</li>");
+            output.write("<li>Lunges: " + stats.getSkips()[3] + "</li>");
+            output.write("<li>Burpees: " + stats.getSkips()[4] + "</li>");       
+            output.write("</ul>");
             
-            ex.printStackTrace();
-            
-        }
-        
-    }
-    
-    public static void beginOutputFile() {
-        
-        FileWriter output = null;
-        File outputFile = new File("HTMLOutput.html");
-        
-        try {
-            
-            output = new FileWriter(outputFile, true);
-            
-            output.write("<html>");
-            output.write("<head>");
-            output.write("<link rel='stylesheet' type='text/css' href='style.css'>");
-            output.write("<link href = 'https://fonts.googleapis.com/css?family=Roboto&display=swap\' rel = 'stylesheet'>");
-            output.write("</head>");
-            output.write("<body>");
-            
-            output.write("<div class = 'card'>");
-            output.write("<h1>UNO Exercise Game</h1>");
+            output.write("<ul>");
+            output.write("<p>Biggest Repetitions per Execise per Hand</p>");
+            output.write("<li>Pushups: " + stats.getBiggestReps()[0] + "</li>");
+            output.write("<li>Squats: " + stats.getBiggestReps()[1] + "</li>");
+            output.write("<li>Situps: " + stats.getBiggestReps()[2] + "</li>");
+            output.write("<li>Lunges: " + stats.getBiggestReps()[3] + "</li>");
+            output.write("<li>Burpees: " + stats.getBiggestReps()[4] + "</li>");       
+            output.write("</ul>");
             output.write("</div>");
             
             output.close();
@@ -115,14 +213,49 @@ public class HTMLWriter {
         
     }
     
-    public static void endOutputFile() {
+    /**
+     * Function to begin the output file with the required header information.
+     */
+    public void beginOutputFile() {
         
         FileWriter output = null;
-        File outputFile = new File("HTMLOutput.html");
         
         try {
             
-            output = new FileWriter(outputFile, true);
+            output = new FileWriter(this.outputFile, true);
+            
+            output.write("<html>");
+            output.write("<head>");
+            output.write("<link rel='stylesheet' type='text/css' href='style.css'>");
+            output.write("<link href = 'https://fonts.googleapis.com/css?family=Roboto&display=swap\' rel = 'stylesheet'>");
+            output.write("</head>");
+            output.write("<body>");
+            
+            output.write("<div class = 'hand' id = 'top'>");
+            output.write("<h1>UNO Exercise Game</h1>");
+            output.write("<a href = '#final'>Jump to Final Statistics</a>");
+            output.write("</div>");
+            
+            output.close();
+            
+        } catch (IOException ex) {
+            
+            ex.printStackTrace();
+            
+        }
+        
+    }
+    
+    /**
+     * Function to end the HTML output file with the required ending and footers.
+     */
+    public void endOutputFile() {
+        
+        FileWriter output = null;
+        
+        try {
+            
+            output = new FileWriter(this.outputFile, true);
             
             output.write("</body>");
             output.write("</html>");
@@ -136,7 +269,5 @@ public class HTMLWriter {
         }
         
     }
-
-    
 
 }

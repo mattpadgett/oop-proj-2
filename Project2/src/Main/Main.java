@@ -19,10 +19,16 @@ import util.HTMLWriter;
  */
 public class Main {
     
-    public static void main(String[] args) {
+    private Game game;
+    
+    /**
+     *
+     */
+    public Main() {
         
         File f = new File("HTMLOutput.html");
-        f.delete();
+        
+        HTMLWriter htmlWriter = new HTMLWriter(f, this);
         
         Scanner sc = new Scanner(System.in);
         
@@ -73,9 +79,9 @@ public class Main {
             
         }
         
-        Game game = new Game(actionCards, shuffleTogether, numDecks);
+        this.game = new Game(actionCards, shuffleTogether, numDecks);
         //Game game = new Game(true, true, 1);
-        HTMLWriter.beginOutputFile();
+        htmlWriter.beginOutputFile();
         
         while(true) {
             
@@ -83,18 +89,38 @@ public class Main {
             
             if(hand != null) {
                 
-                HTMLWriter.appendHand(hand);
+                htmlWriter.appendHand(hand);
                 
             } else {
                 
-                HTMLWriter.appendFinalStats(game.getStatTracker());
+                htmlWriter.appendFinalStats(game.getStatTracker());
                 break;
                 
             }
             
         }
         
-        HTMLWriter.endOutputFile();
+        htmlWriter.endOutputFile();
+        
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public Game getGame() {
+        
+        return this.game;
+                  
+    }
+    
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        
+        Main main = new Main();
         
     }
     

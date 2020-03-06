@@ -10,8 +10,10 @@
 package util; // part of util package
 import model.Hand; // importing the hand class
 
-
-
+/**
+ *
+ * @author matt
+ */
 public class StatTracker { // start of StatTracker class
     
     // Use 3 integer arrays for reps, biggest amount of reps in one hand and skips.
@@ -20,7 +22,9 @@ public class StatTracker { // start of StatTracker class
     private String name[] = new String[5];
     private int biggestReps[] = new int[5];
     
-    
+    /**
+     *
+     */
     public StatTracker() // Stat Tracker Constructor to intialize attributes
     {
         
@@ -40,41 +44,91 @@ public class StatTracker { // start of StatTracker class
     }
    
      // Getters/Accesor
+
+    /**
+     *
+     * @return
+     */
     public int[] getReps() // gets the array of reps
     {
         return this.reps;
     }
+
+    /**
+     *
+     * @return
+     */
     public String[] getName() // gets the array of names for the reps
     {
         return this.name;
     }
+
+    /**
+     *
+     * @return
+     */
     public int[] getSkips() // gets the array of skips
     {
         return skips;
     }
+
+    /**
+     *
+     * @return
+     */
     public int[] getBiggestReps() // gets the array of biggest skips
     {
         return biggestReps;
     }
     // Setters/Mutators
+
+    /**
+     *
+     * @param value
+     * @param index
+     */
     public void setReps(int value, int index) // sets a value in the reps array at a specified index
     {
         this.reps[index] = value;
     }
+
+    /**
+     *
+     * @param name
+     * @param index
+     */
     public void setName(String name, int index) // sets a name into the name array of strings
     {
         this.name[index] = name;
     }
+
+    /**
+     *
+     * @param value
+     * @param index
+     */
     public void setSkips(int value, int index) // sets a value in the skips array at a specified index
     {
         this.skips[index] = value;
     }
+
+    /**
+     *
+     * @param value
+     * @param index
+     */
     public void setBiggestReps(int value, int index) // sets a value in the biggestSkips array at a specified index
     {
         this.biggestReps[index] = value;
     }
     
     // Methods
+
+    /**
+     *
+     * @param newReps
+     * @param newSkips
+     */
     public void updateStats(int [] newReps, int [] newSkips)
     {
         // For newReps, go through 0-4 if new reps has a bigger value than biggest reps is found, assign it to biggestReps

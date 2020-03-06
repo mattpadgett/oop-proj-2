@@ -16,11 +16,21 @@ import model.Deck;
 import model.Hand;
 import util.StatTracker;
 
+/**
+ *
+ * @author matt
+ */
 public class Game {
     
     private Deck deck;
     private StatTracker statTracker;
     
+    /**
+     *
+     * @param hasAction
+     * @param shuffleTogether
+     * @param deckNum
+     */
     public Game(boolean hasAction, boolean shuffleTogether, int deckNum) {
         
         statTracker = new StatTracker();
@@ -28,6 +38,10 @@ public class Game {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public Hand getNextHand() {
         
         if (this.deck != null) {
@@ -42,12 +56,20 @@ public class Game {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public StatTracker getStatTracker() {
         
         return statTracker;
         
     } 
     
+    /**
+     *
+     * @return
+     */
     public Deck getDeck() {
         
         return deck;

@@ -16,6 +16,10 @@ import java.util.Random;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ *
+ * @author matt
+ */
 public class Deck {
     
     //CREATE VARIABLES
@@ -26,6 +30,14 @@ public class Deck {
     
     
     //CONSTRUCTOR   
+
+    /**
+     *
+     * @param numDecks
+     * @param connected
+     * @param includeActionCards
+     * @param game
+     */
     public Deck (int numDecks, boolean connected, boolean includeActionCards, Game game){
        
         this.game = game;
@@ -106,6 +118,10 @@ public class Deck {
         
     }
     
+    /**
+     *
+     * @param deck
+     */
     public static void printDeck(Deck deck) {
         
         System.out.println("Color:\t\tValue:");
@@ -120,24 +136,41 @@ public class Deck {
     
     
     //GETTERS
+
+    /**
+     *
+     * @return
+     */
     public int getDeckCardCount(){
         
         return deckCardCount;
         
     }
     
+    /**
+     *
+     * @return
+     */
     public int getTopDeckIndex(){
         
         return topDeckIndex;
         
     }
     
+    /**
+     *
+     * @return
+     */
     public int getDeckSize(){
         
         return deckSize;
         
     }
     
+    /**
+     *
+     * @return
+     */
     public Card[] getDeck() {
         
         return cards;
@@ -145,18 +178,31 @@ public class Deck {
     }
     
     //SETTERS
+
+    /**
+     *
+     * @param deckCardCount
+     */
     public void setDeckCardCount(int deckCardCount){
         
         this.deckCardCount = deckCardCount;
         
     }
     
+    /**
+     *
+     * @param topDeckIndex
+     */
     public void setTopDeckIndex(int topDeckIndex){
         
         this.topDeckIndex = topDeckIndex;
         
     }
     
+    /**
+     *
+     * @param deckSize
+     */
     public void setDeckSize(int deckSize){
         
         this.deckSize = deckSize;
@@ -180,6 +226,10 @@ public class Deck {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public Hand draw(){
 
         if(this.topDeckIndex == 0) {
@@ -222,6 +272,10 @@ public class Deck {
         
     }
     
+    /**
+     *
+     * @param cardsToBottom
+     */
     public void addToBottom(Card[] cardsToBottom){
         
         int sizeImport = cardsToBottom.length;

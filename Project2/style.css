@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:900);
+
 :root {
 	--border-color: #0099CC;
 	--background-main: #2B2D2F;
@@ -13,15 +15,98 @@ h1, h2 {
   text-align: center;
 }
 
-.card {
+p {
+	font-size: 14pt;
+}
+
+li {
+	font-size: 13pt;
+}
+
+a {
+	text-decoration: none;
+	padding: 8px;
+	background: #FFFFFF;
+	color: #008888;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	display: block;
+	width: 200px;
+	margin: auto;
+	transition: all 0.5s ease 0s;
+}
+
+a:hover {
+	background: #CCCCCC;
+}
+
+.hand {
 	background: var(--background-main);
-	width: 50%;
+	width: 70%;
 	padding: 10px;
 	margin: auto;
 	margin-bottom: 10px;
 	border-radius: 5px;
+	text-align: center;
 }
 
 hr {
 	border: 2px solid var(--border-color);
+}
+
+ul {
+	list-style: none;
+}
+
+.card {
+	background: #FFFFFF;
+	display: inline-block;
+	position: relative;
+	margin: 5px;
+	width: 125px;
+	height: 175px;
+	border-radius: 5px;
+}
+
+.inner {
+	border-radius: 5px;
+	width: 115px;
+	height: 165px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.number {
+	text-align: center;
+	display: inline-block;
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 100px;
+	text-shadow: 3px 3px 2px #000000;
+	position: absolute;
+	height: 100%;
+	top: 55%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.inner.black {
+	background: #000000;
+}
+
+.inner.blue {
+	background: #000099;
+}
+
+.inner.red {
+	background: #990000;
+}
+
+.inner.yellow {
+	background: #999900;
+}
+
+.inner.green {
+	background: #009900;
 }

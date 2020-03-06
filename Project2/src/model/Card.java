@@ -13,20 +13,37 @@ package model;
 
 import java.awt.Color;
 
+/**
+ *
+ * @author matt
+ */
 public class Card {
     
     private Color cardColor;
     private int cardValue;
     
+    /**
+     *
+     * @param cardColor
+     * @param cardValue
+     */
     public Card (Color cardColor, int cardValue){
         this.cardColor = cardColor;
         this.cardValue = cardValue;
     }
         
+    /**
+     *
+     * @return
+     */
     public Color getColor() {
         return cardColor;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getValue(){
         return cardValue;
     }

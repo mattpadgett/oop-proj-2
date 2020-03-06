@@ -27,6 +27,12 @@ Black - Burpees
 14 - +10 burpees and all exercises times 4
 */
 
+/**
+ *
+ * @author matt
+ */
+
+
 public class Hand {
     
     //Attribute initialization
@@ -36,6 +42,12 @@ public class Hand {
     private Game game;
     
     //Constructor
+
+    /**
+     *
+     * @param cards
+     * @param game
+     */
     public Hand(Card[] cards, Game game) {
         
         this.id = nextId;
@@ -46,6 +58,11 @@ public class Hand {
     }
     
     //Getters
+
+    /**
+     *
+     * @return
+     */
     
     public Card[] getCards() {
         
@@ -53,12 +70,20 @@ public class Hand {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public int getId() {
         
         return id;
         
     }
     
+    /**
+     *
+     * @param printHand
+     */
     public static void printHand(Hand printHand) {
         
         System.out.println("\nHand ID: " + printHand.id);
@@ -95,6 +120,12 @@ public class Hand {
     }
     
     //Sorts hand by color and rank
+
+    /**
+     *
+     * @param sortHand
+     * @return
+     */
     public static Hand sort(Hand sortHand) {
         
         int i = 0;
@@ -152,6 +183,10 @@ public class Hand {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public int[] interpret() {
         
         int[] exerciseNum = new int[9];
@@ -384,6 +419,10 @@ public class Hand {
         
     }
     
+    /**
+     *
+     * @param exerciseNum
+     */
     public static void printReps(int[] exerciseNum) {
         
         System.out.println("Push Ups:\t" + exerciseNum[0]);
