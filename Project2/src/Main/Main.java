@@ -26,81 +26,176 @@ public class Main {
      */
     public Main() {
         
-        File f = new File("HTMLOutput.html");
-        
-        HTMLWriter htmlWriter = new HTMLWriter(f, this);
-        
         Scanner sc = new Scanner(System.in);
         
         int input = -1;
         
-        while(input != 0) {
+        System.out.println("\tUNO Exercise Generator");
+        System.out.println("------------------------------------------------");
         
-            System.out.println("\tUNO Exercise Generator!!");
-            System.out.println("------------------------------------------------");
-
-            System.out.println("Choose your game mode.\n  1. Normal Play\n  2. Debug Mode\n\n  0. Exit");
+        while(true) {
+        
+            System.out.print("Choose your game mode.\n\t1. Normal Play\n\t2. Debug Mode (Test Cases)\n\t0. Exit\nChoice: ");
 
             try {
 
                 input = sc.nextInt();
-
+               
             } catch(InputMismatchException e) {
 
-                System.out.println("Invalid input. Try again.");
+                System.out.println("\nInvalid input. Please try again.\n");
                 sc.next();
                 continue;
 
             }
             
-            break;
-        
-        }
-        
-        int numDecks = 0;
-        boolean shuffleTogether = false;
-        boolean actionCards = true;
-        
-        if(input == 0) {
+            int numDecks = 0;
+            boolean shuffleTogether = false;
+            boolean actionCards = true;
             
-            System.exit(0);
+            if(input == 0) {
             
-        }
-        
-        if(input == 1) {
+                System.exit(0);
             
-            System.out.print("How many decks would you like to use? (1 - 3) ");
-            numDecks = sc.nextInt();
-            System.out.print("\nDo you want to shuffle the cards together or seperate? 1 = Together. 0 = Seperate. ");
-            shuffleTogether = (sc.nextInt() == 1);
-            System.out.print("\nWould you like to include action cards? 1 = Yes. 0 = No. ");
-            actionCards = (sc.nextInt() == 1);
-            
-            
-        }
-        
-        this.game = new Game(actionCards, shuffleTogether, numDecks);
-        //Game game = new Game(true, true, 1);
-        htmlWriter.beginOutputFile();
-        
-        while(true) {
-            
-            Hand hand = game.getNextHand();
-            
-            if(hand != null) {
+            }
+
+            if(input == 1) {
+
+                while(true) {
+                    
+                    System.out.print("How many decks would you like to use? (1 - 3) ");
+
+                    try {
+
+                        numDecks = sc.nextInt();
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid input. Please try again.");
+                        sc.next();
+                        continue;
+
+                    }
                 
-                htmlWriter.appendHand(hand);
+                    if(numDecks < 1 || numDecks > 3) {
+                        
+                        System.out.println("You must select either 1, 2, or 3 decks. Try again.");
+                        continue;
+                        
+                    }
+                    
+                    break;
+                    
+                }              
                 
-            } else {
+                while(true) {
+                    
+                    System.out.print("Do you want to shuffle the cards together or seperate? 1 = Together. 0 = Seperate. ");
+
+                    int tempInput = -1;
+                    
+                    try {
+
+                        tempInput = sc.nextInt();
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid input. Please try again.");
+                        sc.next();
+                        continue;
+
+                    }
                 
-                htmlWriter.appendFinalStats(game.getStatTracker());
-                break;
+                    if(tempInput < 0 || tempInput > 1) {
+                        
+                        System.out.println("You must select either 1 or 0. Try again.");
+                        continue;
+                        
+                    }
+                    
+                    shuffleTogether = (tempInput == 1);
+                    break;
+                    
+                }
                 
+                while(true) {
+                    
+                    System.out.print("Would you like to include action cards? 1 = Yes. 0 = No. ");
+
+                    int tempInput = -1;
+                    
+                    try {
+
+                        tempInput = sc.nextInt();
+
+                    } catch(InputMismatchException e) {
+
+                        System.out.println("Invalid input. Please try again.");
+                        sc.next();
+                        continue;
+
+                    }
+                
+                    if(tempInput < 0 || tempInput > 1) {
+                        
+                        System.out.println("You must select either 1 or 0. Try again.");
+                        continue;
+                        
+                    }
+                    
+                    actionCards = (tempInput == 1);
+                    break;
+                    
+                }
+                
+                this.game = new Game(actionCards, shuffleTogether, numDecks);
+                
+                
+                File f = new File("HTMLOutput.html");
+                HTMLWriter htmlWriter = new HTMLWriter(f, this);
+
+                htmlWriter.beginOutputFile();
+
+                while(true) {
+
+                    Hand hand = game.getNextHand();
+
+                    if(hand != null) {
+
+                        htmlWriter.appendHand(hand);
+
+                    } else {
+
+                        htmlWriter.appendFinalStats(game.getStatTracker());
+                        break;
+
+                    }
+
+                }
+
+                htmlWriter.endOutputFile();
+                System.out.println("Game complete. Resetting.\n\n");
+
+            }
+
+            if(input == 2) {
+                
+                int[] deckCounts = {1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3};
+                int[] actionOpts = {1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0};
+                int[] shuffleOpts = {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0};
+                
+                //Run through all scenarios.
+                                     
             }
             
-        }
+            if(input < 0 || input > 2) {
+                
+                System.out.println("\nInvalid input. Please try again.\n");
+                continue;
+                
+            }
         
-        htmlWriter.endOutputFile();
+        }
         
     }
     

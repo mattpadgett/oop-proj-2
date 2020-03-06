@@ -228,6 +228,7 @@ public class HTMLWriter {
             output.write("<head>");
             output.write("<link rel='stylesheet' type='text/css' href='style.css'>");
             output.write("<link href = 'https://fonts.googleapis.com/css?family=Roboto&display=swap\' rel = 'stylesheet'>");
+            output.write("<title>UNO Exercise Game</title>");
             output.write("</head>");
             output.write("<body>");
             

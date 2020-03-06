@@ -35,6 +35,7 @@ public class Game {
         
         statTracker = new StatTracker();
         this.deck = new Deck(deckNum, shuffleTogether, hasAction, this);
+        Hand.resetHandIds();
         
     }
     

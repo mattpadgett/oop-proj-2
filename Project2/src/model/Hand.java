@@ -41,13 +41,6 @@ public class Hand {
     private Card[] cards;
     private Game game;
     
-    //Constructor
-
-    /**
-     *
-     * @param cards
-     * @param game
-     */
     public Hand(Card[] cards, Game game) {
         
         this.id = nextId;
@@ -63,7 +56,6 @@ public class Hand {
      *
      * @return
      */
-    
     public Card[] getCards() {
         
         return cards;
@@ -118,11 +110,15 @@ public class Hand {
         }
         
     }
-    
-    //Sorts hand by color and rank
 
+    public static void resetHandIds() {
+        
+        nextId = 1;
+        
+    }
+    
     /**
-     *
+     * Sorts hand by color and rank
      * @param sortHand
      * @return
      */
