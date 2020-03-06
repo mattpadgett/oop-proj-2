@@ -173,7 +173,7 @@ public class HTMLWriter {
             output = new FileWriter(this.outputFile, true);
             
             output.write("<div class = 'hand' id = 'final'><h2>Final Statistics</h2>");
-            output.write("<a href = '#top'>Jump to Top</a>");
+            output.write("<a href = '#top' id = 'topButton'>Jump to Top</a>");
             output.write("<hr/>");
             output.write("<p>Repetitions per Exercise</p>");
             output.write("<ul>");
@@ -234,7 +234,7 @@ public class HTMLWriter {
             
             output.write("<div class = 'hand' id = 'top'>");
             output.write("<h1>UNO Exercise Game</h1>");
-            output.write("<a href = '#final'>Jump to Final Statistics</a>");
+            output.write("<a href = '#final' id = 'finalButton'>Jump to Final Statistics</a>");
             output.write("</div>");
             
             output.close();

@@ -111,6 +111,9 @@ public class Hand {
         
     }
 
+    /**
+     * Sorts hand by color and rank
+     */
     public static void resetHandIds() {
         
         nextId = 1;
