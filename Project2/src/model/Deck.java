@@ -34,12 +34,14 @@ public class Deck {
     /**
      * to construct
      * @param numDecks Determines the number of deck
-     * @param connected Determines whether or not to shuffle the decks together or seperately
+     * @param connected Determines whether or not to shuffle the decks together or s
      * @param includeActionCards Determines whether or not to include action cards
      * @param game The game object
      */
     public Deck (int numDecks, boolean connected, boolean includeActionCards, Game game){
        
+        this.numDecks = numDecks;
+        this.connected = connected;
         this.game = game;
         Color c = Color.WHITE;
         int arrayCounter = 0, rankIndex = 12;
@@ -102,10 +104,8 @@ public class Deck {
             }
             
         }
-
-            shuffle();//SHUFFLES CARDS THAT WERE JUST CREATED
         
-        
+        shuffle();//SHUFFLES CARDS THAT WERE JUST CREATED     
         
         this.setDeckSize(arrayCounter);//METHOD OVERLOADING
         this.setDeckCardCount(arrayCounter);//METHOD OVERLOADING
@@ -211,7 +211,7 @@ public class Deck {
         
         Random rand = new Random();
         
-        if(numDecks == 1) {
+        if(numDecks == 1 || connected) {
             
             for(int t = 0; t < cards.length; t++){
             
@@ -227,7 +227,7 @@ public class Deck {
             
         }
         
-        if(numDecks > 0) {
+        if(numDecks > 0 && !connected) {
             
             if(includeActionCards) {
                 
@@ -257,7 +257,7 @@ public class Deck {
             
         }
             
-        if(numDecks > 1) {
+        if(numDecks > 1 && !connected) {
             
             if(includeActionCards) {
                 
@@ -287,7 +287,7 @@ public class Deck {
             
         }
         
-        if(numDecks > 2) {
+        if(numDecks > 2 && !connected) {
             
             if(includeActionCards) {
                 
@@ -373,18 +373,13 @@ public class Deck {
     public void addToBottom(Card[] cardsToBottom){
         
         int sizeImport = cardsToBottom.length;
-        //System.out.println(sizeImport);
-        //Hand nhand = new Hand(cards, game);
-        System.out.println("deck index: " + getTopDeckIndex() + "\t" + "sizeImport: "+ sizeImport);
-        //nhand.printHand(nhand);
+
         for(int m = getTopDeckIndex(); m >= 0; m--){
             
             cards[m + sizeImport] = cards[m];
             
         }
-        
-        //nhand.printHand(nhand);
-        
+             
         for(int r = 0; r < sizeImport; r++){
             
             if(cardsToBottom[r] != null) {
