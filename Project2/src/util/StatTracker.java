@@ -12,7 +12,7 @@ import model.Hand; // importing the hand class
 
 /**
  *
- * @author matt
+ * @author Brent Williams R11630670
  */
 public class StatTracker { // start of StatTracker class
     
@@ -23,9 +23,9 @@ public class StatTracker { // start of StatTracker class
     private int biggestReps[] = new int[5];
     
     /**
-     *
+     * StatTracker Constructor to initialize attributes
      */
-    public StatTracker() // Stat Tracker Constructor to intialize attributes
+    public StatTracker()
     {
         
         this.name[0] = "Pushups";
@@ -46,78 +46,78 @@ public class StatTracker { // start of StatTracker class
      // Getters/Accesor
 
     /**
-     *
-     * @return
+     * Gets the array of reps.
+     * @return the array of reps
      */
-    public int[] getReps() // gets the array of reps
+    public int[] getReps()
     {
         return this.reps;
     }
 
     /**
-     *
-     * @return
+     * Gets the array of names for every type of rep.
+     * @return the array of names
      */
-    public String[] getName() // gets the array of names for the reps
+    public String[] getName()
     {
         return this.name;
     }
 
     /**
-     *
-     * @return
+     * Gets the array of reps skipped.
+     * @return the array of skips
      */
-    public int[] getSkips() // gets the array of skips
+    public int[] getSkips()
     {
         return skips;
     }
 
     /**
-     *
-     * @return
+     * Gets the array of biggest reps skipped.
+     * @return the array of biggest reps skipped
      */
-    public int[] getBiggestReps() // gets the array of biggest skips
+    public int[] getBiggestReps()
     {
         return biggestReps;
     }
     // Setters/Mutators
 
     /**
-     *
-     * @param value
-     * @param index
+     *  Sets the reps array a certain value at a specific index.
+     * @param value - the number of a certain rep
+     * @param index - to specify a certain rep
      */
-    public void setReps(int value, int index) // sets a value in the reps array at a specified index
+    public void setReps(int value, int index)
     {
         this.reps[index] = value;
     }
 
     /**
-     *
-     * @param name
-     * @param index
+     * Sets the name of a rep at a specified index within the name array
+     * @param name - the name of a rep 
+     * @param index - the index of the name array specified by the user
      */
-    public void setName(String name, int index) // sets a name into the name array of strings
+    public void setName(String name, int index)
     {
         this.name[index] = name;
     }
 
     /**
-     *
-     * @param value
-     * @param index
+     * Sets the number of skips at a specified index within the skips array
+     * @param value - the number of skips for a certain exercise
+     * @param index - the index of the skips array specified by the user
      */
-    public void setSkips(int value, int index) // sets a value in the skips array at a specified index
+    public void setSkips(int value, int index)
     {
         this.skips[index] = value;
     }
 
     /**
-     *
-     * @param value
-     * @param index
+     * Sets the biggest number of skips of a certain rep given a specified index
+     * @param value - the number of biggest skips for a certain exercise
+     * @param index - the index of the biggestReps array specified by the user
      */
-    public void setBiggestReps(int value, int index) // sets a value in the biggestSkips array at a specified index
+    public void setBiggestReps(int value, int index)
     {
         this.biggestReps[index] = value;
     }
@@ -125,9 +125,9 @@ public class StatTracker { // start of StatTracker class
     // Methods
 
     /**
-     *
-     * @param newReps
-     * @param newSkips
+     * Updates the statistics for the reps, skips, and biggestReps arrays
+     * @param newReps - an array of integers to represent the list of reps
+     * @param newSkips - an array of integers to represent the list of skips
      */
     public void updateStats(int [] newReps, int [] newSkips)
     {

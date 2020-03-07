@@ -26,18 +26,30 @@ li {
 a {
 	text-decoration: none;
 	padding: 8px;
-	background: #FFFFFF;
+	background: var(--background-main);
 	color: #008888;
 	border-radius: 4px;
 	margin-bottom: 5px;
 	display: block;
-	width: 200px;
+	width: 125px;
 	margin: auto;
 	transition: all 0.5s ease 0s;
 }
 
+#topButton {
+	position: fixed;
+	right: 10px;
+	top: 20px;
+}
+
+#finalButton {
+	position: fixed;
+	right: 10px;
+	top : 60px;
+}
+
 a:hover {
-	background: #CCCCCC;
+	background: #000000;
 }
 
 .hand {
@@ -104,7 +116,7 @@ ul {
 }
 
 .inner.yellow {
-	background: #999900;
+	background: #DDDD33;
 }
 
 .inner.green {

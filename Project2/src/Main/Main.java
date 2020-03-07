@@ -1,5 +1,14 @@
-package Main;
+/* CS 2365 Object-Oriented Programming - Spring 2020
+ * Project 2 - UNO Exercises
+ * File: HTMLWriter.java
+ * Date: 02/15/2020
+ * Author: Matthew Padgett - matpadge - R11564420
+ * Contributors: None.
+ *
+ * Description: Main class with main method for starting the game and dealing with the view of the game.
+ */
 
+package Main;
 
 import java.io.File;
 import java.util.InputMismatchException;
@@ -7,22 +16,16 @@ import java.util.Scanner;
 import model.Hand;
 import util.HTMLWriter;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author Matt
+ * Main class with main method for starting the game and dealing with the view of the game.
+ * @author Matt Padgett (R11564420)
  */
 public class Main {
     
     private Game game;
     
     /**
-     *
+     * Class constructor to start the game and directly communicate with the player and other classes.
      */
     public Main() {
         
@@ -210,7 +213,7 @@ public class Main {
     }
     
     /**
-     *
+     * Main method to start construct the Main class.
      * @param args
      */
     public static void main(String[] args) {
