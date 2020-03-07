@@ -141,11 +141,28 @@ public class HTMLWriter {
 
             }
             
-            o.write("<ul><li>Pushups: " + reps[0] + "</li>");
-            o.write("<li>Squats: " + reps[1] + "</li>");
-            o.write("<li>Situps: " + reps[2] + "</li>");
-            o.write("<li>Lunges: " + reps[3] + "</li>");
-            o.write("<li>Burpees: " + reps[4] + "</li></ul>");
+            o.write("<ul><li>Pushups: " + reps[0]);
+            if(reps[5] != 0)
+                o.write(" - " + reps[5] + " minute break after this.");
+            o.write("</li>");
+            
+            o.write("<li>Squats: " + reps[1]);
+            if(reps[6] != 0)
+                o.write(" - " + reps[6] + " minute break after this.");
+            o.write("</li>");
+            
+            o.write("<li>Situps: " + reps[2]);
+            if(reps[7] != 0)
+                o.write(" - " + reps[7] + " minute break after this.");
+            o.write("</li>");
+            
+            o.write("<li>Lunges: " + reps[3]);
+            if(reps[8] != 0)
+                o.write(" - " + reps[8] + " minute break after this.");
+            o.write("</li>");
+            
+            o.write("<li>Burpees: " + reps[4]);
+            o.write("</li></ul>");
             
             o.write("</div>");
             

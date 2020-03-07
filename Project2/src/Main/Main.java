@@ -184,10 +184,34 @@ public class Main {
             if(input == 2) {
                 
                 int[] deckCounts = {1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3};
-                int[] actionOpts = {1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0};
-                int[] shuffleOpts = {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0};
+                boolean[] actionOpts = {true, true, false, false, true, true, false, false, true, true, false, false};
+                boolean[] shuffleOpts = {true, false, true, false, true, false, true, false, true, false, true, false};
                 
-                //Run through all scenarios.
+                for(int i = 0; i < deckCounts.length; i++) {
+                    
+                    System.out.println("Debug game setup " + (i + 1) + " of " + deckCounts.length);
+                    
+                    Game game = new Game(actionOpts[i], shuffleOpts[i], deckCounts[i]);
+                    
+                    while(true) {
+
+                        Hand hand = game.getNextHand();
+
+                        if(hand != null) {
+
+                            hand.printHand(hand);
+
+                        } else {
+
+                            break;
+
+                        }
+
+                    }
+                    
+                    System.out.println();
+                    
+                }
                                      
             }
             

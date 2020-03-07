@@ -18,7 +18,7 @@ import java.util.Collections;
 
 /**
  *
- * @author matt
+ * @author jason
  */
 public class Deck {
     
@@ -32,11 +32,11 @@ public class Deck {
     //CONSTRUCTOR   
 
     /**
-     *
-     * @param numDecks
-     * @param connected
-     * @param includeActionCards
-     * @param game
+     * to construct
+     * @param numDecks Determines the number of deck
+     * @param connected Determines whether or not to shuffle the decks together or seperately
+     * @param includeActionCards Determines whether or not to include action cards
+     * @param game The game object
      */
     public Deck (int numDecks, boolean connected, boolean includeActionCards, Game game){
        
@@ -101,19 +101,9 @@ public class Deck {
                 
             }
             
-            if(connected == false){
-                
-                //shuffle();
-                
-            }
-            
         }
-        
-        if(connected == true){
-            
+
             shuffle();//SHUFFLES CARDS THAT WERE JUST CREATED
-        
-        }
         
         
         
@@ -124,8 +114,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @param deck
+     * Print the deck to the screen
+     * @param deck the deck object
      */
     public static void printDeck(Deck deck) {
         
@@ -142,8 +132,8 @@ public class Deck {
     //GETTERS
 
     /**
-     *
-     * @return
+     * Return the deck card count
+     * @return deck card count
      */
     public int getDeckCardCount(){
         
@@ -152,8 +142,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @return
+     * return the top deck index
+     * @return top deck index
      */
     public int getTopDeckIndex(){
         
@@ -162,8 +152,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @return
+     * get the deck size
+     * @return size of the deck
      */
     public int getDeckSize(){
         
@@ -172,8 +162,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @return
+     * get the cards in the deck
+     * @return array of cards
      */
     public Card[] getDeck() {
         
@@ -184,8 +174,8 @@ public class Deck {
     //SETTERS
 
     /**
-     *
-     * @param deckCardCount
+     * set the deck card count
+     * @param deckCardCount new value
      */
     public void setDeckCardCount(int deckCardCount){
         
@@ -194,8 +184,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @param topDeckIndex
+     * set the top deck index variables
+     * @param topDeckIndex new value
      */
     public void setTopDeckIndex(int topDeckIndex){
         
@@ -204,8 +194,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @param deckSize
+     * set the deck size variable
+     * @param deckSize new value
      */
     public void setDeckSize(int deckSize){
         
@@ -214,12 +204,14 @@ public class Deck {
     }
     
     
-    //METHODS
+    /*
+    * shuffle the decks
+    */
     private void shuffle(){
         
         Random rand = new Random();
         
-        if(connected && numDecks == 1) {
+        if(numDecks == 1) {
             
             for(int t = 0; t < cards.length; t++){
             
@@ -328,8 +320,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @return
+     * draw 7 cards
+     * @return a Hand object
      */
     public Hand draw(){
 
@@ -368,8 +360,6 @@ public class Deck {
         
         Hand hand = new Hand(drawForHand, game);
         
-        hand.printHand(hand);
-        
     //    hand = Hand.sort(hand);
         
         return hand;
@@ -377,8 +367,8 @@ public class Deck {
     }
     
     /**
-     *
-     * @param cardsToBottom
+     * add any cards to bottom as a result
+     * @param cardsToBottom 
      */
     public void addToBottom(Card[] cardsToBottom){
         
@@ -407,8 +397,6 @@ public class Deck {
         }
         
         //setTopDeckIndex(getTopDeckIndex() + sizeImport);
-        
-        
         
     }
     
