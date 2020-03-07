@@ -113,7 +113,7 @@ public class Hand {
     }
     
     /**
-     * Resets nextId for playing multiple games in a row
+     * Resets nextId to 1for playing multiple games in a row
      */
     public static void resetHandIds() {
         
@@ -124,7 +124,7 @@ public class Hand {
     /**
      * Sorts hand by color and rank
      * @param sortHand object of Hand class
-     * @return Returns the object of Hand class
+     * @return Returns the object of Hand class after it has been sorted
      */
     public void sort() {
         
@@ -184,8 +184,9 @@ public class Hand {
     }
     
     /**
-     *
-     * @return
+     * Determines how many reps of each exercise need to be done for each hand, how many 1 minute breaks need to be taken, 
+     * and how many reps will be skipped of each exercise
+     * @return Returns an array of integers filled with rep and break numbers for each exercise
      */
     public int[] interpret() {
         
@@ -439,8 +440,8 @@ public class Hand {
     }
     
     /**
-     *
-     * @param exerciseNum
+     * Prints Reps and breaks for each exercise. Used for testing
+     * @param exerciseNum An array of integers filled with rep and break counts
      */
     public static void printReps(int[] exerciseNum) {
         
