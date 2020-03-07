@@ -10,6 +10,7 @@ package model;
 
 import Main.Game;
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.Random;
 
 /*
@@ -29,7 +30,7 @@ Black - Burpees
 
 /**
  *
- * @author matt
+ * @author Coby Kromis R11567402
  */
 
 
@@ -53,8 +54,8 @@ public class Hand {
     //Getters
 
     /**
-     *
-     * @return
+     * getter for card array attribute for Hand object
+     * @return returns an array of Card type
      */
     public Card[] getCards() {
         
@@ -63,8 +64,8 @@ public class Hand {
     }
     
     /**
-     *
-     * @return
+     * getter for the id of a hand object
+     * @return returns an integer
      */
     public int getId() {
         
@@ -73,8 +74,8 @@ public class Hand {
     }
     
     /**
-     *
-     * @param printHand
+     * Prints colors and values of the cards in the card array of a given Hand object to the console for testing
+     * @param printHand object of the Hand class
      */
     public static void printHand(Hand printHand) {
         
@@ -110,7 +111,10 @@ public class Hand {
         }
         
     }
-
+    
+    /**
+     * Resets nextId for playing multiple games in a row
+     */
     public static void resetHandIds() {
         
         nextId = 1;
@@ -119,8 +123,8 @@ public class Hand {
     
     /**
      * Sorts hand by color and rank
-     * @param sortHand
-     * @return
+     * @param sortHand object of Hand class
+     * @return Returns the object of Hand class
      */
     public static Hand sort(Hand sortHand) {
         
@@ -186,7 +190,6 @@ public class Hand {
     public int[] interpret() {
         
         int[] exerciseNum = new int[9];
-        Card[] botPile = new Card[6];
         int sitUp = 0, lunge = 0, squat = 0, pushUp = 0, burpee = 0, wildCount = 0, wild4Count = 0;
         int PushUpSkipNum = 0, SitUpSkipNum = 0, SquatSkipNum = 0, LungeSkipNum = 0, count = 0;
         int PushUpBreakNum = 0, SitUpBreakNum = 0, SquatBreakNum = 0, LungeBreakNum = 0;
@@ -302,6 +305,20 @@ public class Hand {
                 }
                 
             } else if (cards[i].getValue() == 12) {
+                
+                int discardCount = 0;
+                
+                for (int j = 0; j < cards.length; j++) {
+                    
+                    if (cards[j].getColor().equals(cards[i].getColor())) {
+                        
+                        discardCount++;
+                        
+                    }
+                    
+                }
+                Card[] botPile = new Card[discardCount];
+                Arrays.fill(botPile, null);
                 
                 if (cards[i].getColor() == Color.red) {
 
