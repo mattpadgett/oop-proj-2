@@ -123,8 +123,6 @@ public class Hand {
     
     /**
      * Sorts hand by color and rank
-     * @param sortHand object of Hand class
-     * @return Returns the object of Hand class after it has been sorted
      */
     public void sort() {
         
