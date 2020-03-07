@@ -44,10 +44,19 @@ public class Deck {
         Color c = Color.WHITE;
         int arrayCounter = 0, rankIndex = 12;
         
-        if (includeActionCards == false)
-            rankIndex = 9; //LOWERS INDEX IF ACTION CARDS ARE TAKEN OUT
         
-        this.cards = new Card[108 * numDecks];
+        
+        if (includeActionCards == false){
+            
+            rankIndex = 9; //LOWERS INDEX IF ACTION CARDS ARE TAKEN OUT
+            this.cards = new Card[108 * numDecks - (32 * numDecks)];
+            
+        }
+        else
+            this.cards = new Card[108 * numDecks];
+        
+        
+        
             
         for (int m = 0; m < numDecks; m++){
 
@@ -72,7 +81,7 @@ public class Deck {
                 
                 cards[arrayCounter] = new Card (c, 0);//ZERO ONLY HAS ONE RANK
                 arrayCounter++;  
-                
+                //System.out.println(includeActionCards);
                 if(includeActionCards == true){
                     
                     cards[arrayCounter] = new Card (Color.BLACK, 13);//WILD
@@ -92,8 +101,6 @@ public class Deck {
                     }    
                 }    
             }
-            
-            
             
             if(connected == false){
                 
@@ -131,7 +138,6 @@ public class Deck {
         }
         
     }
-    
     
     //GETTERS
 
@@ -244,11 +250,13 @@ public class Deck {
             
         } else {
             
+            //setTopDeckIndex(3);
             drawForHand = new Card[this.topDeckIndex % 7];
+            //System.out.println(this.topDeckIndex % 7);
             
         }
 
-        Arrays.fill(drawForHand, null);
+        //Arrays.fill(drawForHand, null);
         
         for(int i = 0; i < drawForHand.length; i++){
             
@@ -263,7 +271,9 @@ public class Deck {
         
         Hand hand = new Hand(drawForHand, game);
         
-        hand = Hand.sort(hand);
+        //hand.printHand(hand);
+        
+    //    hand = Hand.sort(hand);
         
         return hand;
         
@@ -276,7 +286,7 @@ public class Deck {
     public void addToBottom(Card[] cardsToBottom){
         
         int sizeImport = cardsToBottom.length;
-        
+        System.out.println(sizeImport);
         for(int m = getTopDeckIndex(); m >= 0; m--){
             
             cards[m + sizeImport] = cards[m];
@@ -292,6 +302,8 @@ public class Deck {
             }
             
         }
+        
+        
         
     }
     
