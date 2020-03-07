@@ -44,20 +44,17 @@ public class Deck {
         Color c = Color.WHITE;
         int arrayCounter = 0, rankIndex = 12;
         
-        
-        
         if (includeActionCards == false){
             
             rankIndex = 9; //LOWERS INDEX IF ACTION CARDS ARE TAKEN OUT
             this.cards = new Card[108 * numDecks - (32 * numDecks)];
             
-        }
-        else
-            this.cards = new Card[108 * numDecks];
-        
-        
-        
+        } else {
             
+            this.cards = new Card[108 * numDecks];
+            
+        }
+        
         for (int m = 0; m < numDecks; m++){
 
             for (int j = 0; j < 4; j++){ //LOOP FOR EACH COLOR
@@ -99,14 +96,17 @@ public class Deck {
                         arrayCounter++;
                         
                     }    
-                }    
+                    
+                }
+                
             }
             
             if(connected == false){
                 
-                shuffle();
+                //shuffle();
                 
             }
+            
         }
         
         if(connected == true){
@@ -219,15 +219,112 @@ public class Deck {
         
         Random rand = new Random();
         
-        for(int t = 0; t < cards.length; t++){
+        if(connected && numDecks == 1) {
             
-            int randomIndexSwap = rand.nextInt(cards.length);
+            for(int t = 0; t < cards.length; t++){
             
-            Card temp = cards[randomIndexSwap];
-            cards[randomIndexSwap] = cards[t];
-            cards[t] = temp;
+                int randomIndexSwap = rand.nextInt(cards.length);
+
+                Card temp = cards[randomIndexSwap];
+                cards[randomIndexSwap] = cards[t];
+                cards[t] = temp;
+            
+            } 
+            
+            return;
             
         }
+        
+        if(numDecks > 0) {
+            
+            if(includeActionCards) {
+                
+                for(int t = 0; t < 108; t++){
+            
+                    int randomIndexSwap = rand.nextInt(108);
+
+                    Card temp = cards[randomIndexSwap];
+                    cards[randomIndexSwap] = cards[t];
+                    cards[t] = temp;
+
+                }
+                
+            } else {
+                
+                for(int t = 0; t < 76; t++){
+            
+                    int randomIndexSwap = rand.nextInt(76);
+
+                    Card temp = cards[randomIndexSwap];
+                    cards[randomIndexSwap] = cards[t];
+                    cards[t] = temp;
+
+                }
+                
+            } 
+            
+        }
+            
+        if(numDecks > 1) {
+            
+            if(includeActionCards) {
+                
+                for(int t = 108; t < 108+108; t++){
+            
+                    int randomIndexSwap = rand.nextInt(108) + 108;
+
+                    Card temp = cards[randomIndexSwap];
+                    cards[randomIndexSwap] = cards[t];
+                    cards[t] = temp;
+
+                }
+                
+            } else {
+                
+                for(int t = 76; t < 76+76; t++){
+            
+                    int randomIndexSwap = rand.nextInt(76)+76;
+
+                    Card temp = cards[randomIndexSwap];
+                    cards[randomIndexSwap] = cards[t];
+                    cards[t] = temp;
+
+                }
+                
+            }
+            
+        }
+        
+        if(numDecks > 2) {
+            
+            if(includeActionCards) {
+                
+                for(int t = 108+108; t < 108+108+108; t++){
+            
+                    int randomIndexSwap = rand.nextInt(108) + 108 + 108;
+
+                    Card temp = cards[randomIndexSwap];
+                    cards[randomIndexSwap] = cards[t];
+                    cards[t] = temp;
+
+                }
+                
+            } else {
+                
+                for(int t = 76+76; t < 76+76+76; t++){
+            
+                    int randomIndexSwap = rand.nextInt(76)+76+76;
+
+                    Card temp = cards[randomIndexSwap];
+                    cards[randomIndexSwap] = cards[t];
+                    cards[t] = temp;
+
+                }
+                
+            }
+            
+        }
+        
     }
     
     /**
@@ -264,14 +361,14 @@ public class Deck {
             
             drawForHand[i] = this.cards[index];
             this.cards[index] = null;
-            
+            //System.out.println(getTopDeckIndex());
             this.setTopDeckIndex(index);
             
         }
         
         Hand hand = new Hand(drawForHand, game);
         
-        //hand.printHand(hand);
+        hand.printHand(hand);
         
     //    hand = Hand.sort(hand);
         
@@ -286,22 +383,30 @@ public class Deck {
     public void addToBottom(Card[] cardsToBottom){
         
         int sizeImport = cardsToBottom.length;
-        System.out.println(sizeImport);
+        //System.out.println(sizeImport);
+        //Hand nhand = new Hand(cards, game);
+        System.out.println("deck index: " + getTopDeckIndex() + "\t" + "sizeImport: "+ sizeImport);
+        //nhand.printHand(nhand);
         for(int m = getTopDeckIndex(); m >= 0; m--){
             
             cards[m + sizeImport] = cards[m];
             
         }
         
+        //nhand.printHand(nhand);
+        
         for(int r = 0; r < sizeImport; r++){
             
             if(cardsToBottom[r] != null) {
                 
                 cards[r] = cardsToBottom[r];    
+                setTopDeckIndex(getTopDeckIndex() + 1);
                 
             }
             
         }
+        
+        //setTopDeckIndex(getTopDeckIndex() + sizeImport);
         
         
         

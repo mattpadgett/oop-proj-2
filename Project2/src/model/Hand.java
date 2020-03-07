@@ -126,25 +126,25 @@ public class Hand {
      * @param sortHand object of Hand class
      * @return Returns the object of Hand class
      */
-    public static Hand sort(Hand sortHand) {
+    public void sort() {
         
         int i = 0;
         int replaceCount = 0;
         Card temp = null;
         
-        while (i < sortHand.getCards().length) {
+        while (i < cards.length) {
             
-            for (int j = i + 1; j < sortHand.getCards().length; j++) {                
+            for (int j = i + 1; j < cards.length; j++) {                
                 
-                if (!sortHand.cards[i].getColor().equals(sortHand.cards[j].getColor())) {
+                if (!cards[i].getColor().equals(cards[j].getColor())) {
                     
-                    for (int k = j; k < sortHand.getCards().length; k++) {
+                    for (int k = j; k < cards.length; k++) {
                         
-                        if (sortHand.cards[i].getColor().equals(sortHand.cards[k].getColor())) {
+                        if (cards[i].getColor().equals(cards[k].getColor())) {
                             
-                            temp = sortHand.cards[j];
-                            sortHand.cards[j] = sortHand.cards[k];
-                            sortHand.cards[k] = temp;
+                            temp = cards[j];
+                            cards[j] = cards[k];
+                            cards[k] = temp;
                             j++;
                             replaceCount++;
                             
@@ -161,17 +161,17 @@ public class Hand {
                   
         }
         
-        for (int j = 0; j < sortHand.getCards().length - 1; j++) {
+        for (int j = 0; j < cards.length - 1; j++) {
             
-            if (sortHand.cards[j].getColor().equals(sortHand.cards[j + 1].getColor())) {
+            if (cards[j].getColor().equals(cards[j + 1].getColor())) {
                 
-                if (sortHand.cards[j].getValue() > sortHand.cards[j + 1].getValue()) {
+                if (cards[j].getValue() > cards[j + 1].getValue()) {
                     
                     Card temp2 = null;
                     
-                    temp2 = sortHand.cards[j];
-                    sortHand.cards[j] = sortHand.cards[j +1];
-                    sortHand.cards[j + 1] = temp2;
+                    temp2 = cards[j];
+                    cards[j] = cards[j +1];
+                    cards[j + 1] = temp2;
                     
                 }
                 
@@ -179,7 +179,7 @@ public class Hand {
             
         }
         
-        return sortHand;
+        
         
     }
     
@@ -194,7 +194,7 @@ public class Hand {
         int PushUpSkipNum = 0, SitUpSkipNum = 0, SquatSkipNum = 0, LungeSkipNum = 0, count = 0;
         int PushUpBreakNum = 0, SitUpBreakNum = 0, SquatBreakNum = 0, LungeBreakNum = 0;
         
-        sort(this);
+        sort();
         
         for (int i = 0; i < cards.length; i++) {
             
@@ -307,91 +307,97 @@ public class Hand {
             } else if (cards[i].getValue() == 12) {
                 
                 int discardCount = 0;
-                
+                                
                 for (int j = 0; j < cards.length; j++) {
                     
-                    if (cards[j].getColor().equals(cards[i].getColor())) {
+                    if (cards[j].getColor().equals(cards[i].getColor()) && cards[j].getValue() != 12) {
                         
                         discardCount++;
                         
                     }
                     
                 }
-                Card[] botPile = new Card[discardCount];
-                Arrays.fill(botPile, null);
                 
-                if (cards[i].getColor() == Color.red) {
-
-                    SitUpSkipNum = SitUpSkipNum + sitUp;
-                    sitUp = 0;
+                if(discardCount != 0) {
+                    count = 0;
                     
-                    for (int j = 0; j < cards.length; j++) {
-                        
-                        if (cards[j].getColor() == Color.red && cards[j].getValue() != 12) {
-                            
-                            botPile[count] = cards[j];
-                            count++;
-                            
+                    Card[] botPile = new Card[discardCount];
+                    Arrays.fill(botPile, null);
+                
+                    if (cards[i].getColor() == Color.red) {
+
+                        SitUpSkipNum = SitUpSkipNum + sitUp;
+                        sitUp = 0;
+
+                        for (int j = 0; j < cards.length; j++) {
+
+                            if (cards[j].getColor() == Color.red && cards[j].getValue() != 12) {
+
+                                botPile[count] = cards[j];
+                                count++;
+
+                            }
+
                         }
                         
-                    }
-                    
-                    game.getDeck().addToBottom(botPile);
-                    
-                } else if (cards[i].getColor() == Color.blue) {
+                        game.getDeck().addToBottom(botPile);
 
-                    PushUpSkipNum = PushUpSkipNum + pushUp;
-                    pushUp = 0;
-                    
-                    for (int j = 0; j < cards.length; j++) {
-                        
-                        if (cards[j].getColor() == Color.blue && cards[j].getValue() != 12) {
-                            
-                            botPile[count] = cards[j];
-                            count++;
-                            
+                    } else if (cards[i].getColor() == Color.blue) {
+
+                        PushUpSkipNum = PushUpSkipNum + pushUp;
+                        pushUp = 0;
+
+                        for (int j = 0; j < cards.length; j++) {
+
+                            if (cards[j].getColor() == Color.blue && cards[j].getValue() != 12) {
+
+                                botPile[count] = cards[j];
+                                count++;
+
+                            }
+
                         }
                         
-                    }
-                    
-                    game.getDeck().addToBottom(botPile);
-                    
-                } else if (cards[i].getColor() == Color.yellow) {
+                        game.getDeck().addToBottom(botPile);
 
-                    SquatSkipNum = SquatSkipNum + squat;
-                    squat = 0;
-                    
-                    for (int j = 0; j < cards.length; j++) {
-                        
-                        if (cards[j].getColor() == Color.yellow && cards[j].getValue() != 12) {
-                            
-                            botPile[count] = cards[j];
-                            count++;
-                            
+                    } else if (cards[i].getColor() == Color.yellow) {
+
+                        SquatSkipNum = SquatSkipNum + squat;
+                        squat = 0;
+
+                        for (int j = 0; j < cards.length; j++) {
+
+                            if (cards[j].getColor() == Color.yellow && cards[j].getValue() != 12) {
+
+                                botPile[count] = cards[j];
+                                count++;
+
+                            }
+
                         }
                         
-                    }
-                    
-                    game.getDeck().addToBottom(botPile);
-                    
-                } else if (cards[i].getColor() == Color.green) {
+                        game.getDeck().addToBottom(botPile);
 
-                    LungeSkipNum = LungeSkipNum + lunge;
-                    lunge = 0;
-                    
-                    for (int j = 0; j < cards.length; j++) {
-                        
-                        if (cards[j].getColor() == Color.green && cards[j].getValue() != 12) {
-                            
-                            botPile[count] = cards[j];
-                            count++;
-                            
+                    } else if (cards[i].getColor() == Color.green) {
+
+                        LungeSkipNum = LungeSkipNum + lunge;
+                        lunge = 0;
+
+                        for (int j = 0; j < cards.length; j++) {
+
+                            if (cards[j].getColor() == Color.green && cards[j].getValue() != 12) {
+
+                                botPile[count] = cards[j];
+                                count++;
+
+                            }
+
                         }
-                        
+
+                        game.getDeck().addToBottom(botPile);
+
                     }
-                    
-                    game.getDeck().addToBottom(botPile);
-                    
+                
                 }
                 
             }
